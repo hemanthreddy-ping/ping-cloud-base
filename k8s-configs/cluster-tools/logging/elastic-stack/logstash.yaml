@@ -318,11 +318,6 @@ data:
                     add_field => { "suspicious_country" => "YES" }
                 }
             }
-
-            mutate {
-                remove_field => "[message]"
-                remove_field => "[tags]"
-            }
         }
 
         # PROCESS PING ACCESS AUDIT LOG
@@ -542,7 +537,7 @@ spec:
 
       containers:
       - name: logstash
-        image: antonklyba/logstash:6.8.10.27
+        image: antonklyba/logstash:6.8.10.32
         
         securityContext:
           runAsUser: 0
