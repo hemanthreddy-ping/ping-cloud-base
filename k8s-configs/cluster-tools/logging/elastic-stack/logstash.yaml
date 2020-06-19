@@ -71,7 +71,7 @@ data:
           target => "kubernetes"
         }
         mutate {
-          add_field => { "stream_name" => "%{kubernetes[pod]}_%{kubernetes[namespace]}_%{kubernetes[container_name]}_%{kubernetes[container_id]}" }
+          add_field => { "stream_name" => "%{[kubernetes][pod]}_%{[kubernetes][namespace]}_%{[kubernetes][container_name]}_%{[kubernetes][container_id]}" }
         }
       }
     }
@@ -537,7 +537,7 @@ spec:
 
       containers:
       - name: logstash
-        image: antonklyba/logstash:6.8.10.32
+        image: antonklyba/logstash:7.8.0.1
         
         securityContext:
           runAsUser: 0
