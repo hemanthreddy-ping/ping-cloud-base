@@ -598,7 +598,7 @@ spec:
             protocol: TCP
           - containerPort: 20515
             name: pd-directory-in
-            protocol: TCP
+            protocol: UDP
           - containerPort: 20516
             name: pa-system-in
             protocol: TCP
@@ -675,6 +675,7 @@ spec:
       name: pf-audit-in
     - port: 20515
       name: pd-directory-in
+      protocol: UDP
     - port: 20516
       name: pa-system-in
     - port: 20517

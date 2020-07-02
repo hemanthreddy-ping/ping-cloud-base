@@ -165,7 +165,7 @@ spec:
 
       containers:
       - name: elasticsearch
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
         workingDir: /scripts
         command: ["sh", '$(CONTAINER_NAME).sh']
 
@@ -196,9 +196,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-          ### Security disabled
         - name: XPACK_SECURITY_ENABLED
-          value: "false"
+          value: "true"
         - name: XPACK_SECURITY_HTTP_SSL_ENABLED
           value: "false"
         - name: XPACK_SECURITY_TRANSPORT_SSL_ENABLED
