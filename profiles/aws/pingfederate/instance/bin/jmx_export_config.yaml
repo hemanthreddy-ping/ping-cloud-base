@@ -2,4 +2,4 @@
 startDelaySeconds: 0
 lowercaseOutputName: false
 lowercaseOutputLabelNames: false
-whitelistObjectNames: ["org.eclipse.jetty.server.handler: statisticshandler", "org.eclipse.jetty.server: connectorstatistics", "pingfederate:*", "java.lang:*"]
+whitelistObjectNames: ["org.eclipse.jetty.server.handler:*", "org.eclipse.jetty.server:*", "pingfederate:*", "java.lang:*"]
