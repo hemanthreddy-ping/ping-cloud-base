@@ -6,7 +6,8 @@ whitelistObjectNames: ["org.eclipse.jetty.server.handler:*", "org.eclipse.jetty.
 rules:
   - pattern: ".*xx"
   - pattern: ".*requests"  
-  - pattern: ".*requestTime.*"
+  - pattern: ".*requestTimeTotal"
+  - pattern: ".*requestTimeMean"
   - pattern: ".*requestsActive"
   - pattern: ".*connections"
   - pattern: ".*connectionsOpen"
