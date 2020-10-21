@@ -2,14 +2,4 @@
 startDelaySeconds: 0
 lowercaseOutputName: false
 lowercaseOutputLabelNames: false
-whitelistObjectNames: ["org.eclipse.jetty.server.handler:*", "org.eclipse.jetty.server: connectorstatistics", "pingfederate:*", "java.lang:*"]
-rules:
-  - pattern: ".*xx"
-  - pattern: ".*requests"  
-  - pattern: ".*requestTimeTotal"
-  - pattern: ".*requestTimeMean"
-  - pattern: ".*requestsActive"
-  - pattern: ".*connections"
-  - pattern: ".*connectionsOpen"
-  - pattern: ".*TOTAL_FAILED_TRANSACTIONS"
-  - pattern: ".*TOTAL_TRANSACTIONS"
+whitelistObjectNames: ["org.eclipse.jetty.server.handler: statisticshandler", "org.eclipse.jetty.server: connectorstatistics", "pingfederate:*", "java.lang:*"]
