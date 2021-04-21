@@ -183,7 +183,7 @@ if [ ${NEW_RELIC_LICENSE_KEY} != 'unused' ]; then
     BASE_META=`curl -s http://metadata:5000`
     NEW_RELIC_LABELS=`echo ${NEW_RELIC_LABELS}|sed 's/\"//g'`
     APP_VERSION=`echo ${BASE_META}|jq .version.\"${NEW_RELIC_APP_NAME}\".version|sed 's/\"//g'`
-    PING_CLOUD_VERSION=`echo ${BASE_META}|jq .version."ping-cloud-base".version|sed 's/\"//g'`
+    PING_CLOUD_VERSION=`echo ${BASE_META}|jq .version.\"ping-cloud-base\".version|sed 's/\"//g'`
     export NEW_RELIC_LABELS="${NEW_RELIC_LABELS};pod_name:${NEW_RELIC_POD_NAME};app_version:${APP_VERSION};ping_cloud_version:${PING_CLOUD_VERSION}"
     if [ -z ${JAVA_AGENT_OPTS} ]; then
         JAVA_AGENT_OPTS="-javaagent:/opt/staging/newrelic.jar"

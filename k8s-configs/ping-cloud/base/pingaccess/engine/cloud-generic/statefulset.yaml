@@ -154,6 +154,10 @@ spec:
               key: PA_ADMIN_USER_PASSWORD
         - name: NEW_RELIC_APP_NAME
           value: pingaccess
+        - name: NEW_RELIC_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         envFrom:
         - configMapRef:
             name: pingaccess-environment-variables
