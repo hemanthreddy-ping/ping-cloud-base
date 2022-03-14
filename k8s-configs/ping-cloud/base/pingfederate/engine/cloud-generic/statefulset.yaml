@@ -44,8 +44,8 @@ spec:
           runAsNonRoot: true
           runAsUser: 9031
           allowPrivilegeEscalation: false
-        image: public.ecr.aws/r2h3l6e4/pingcloud-services/p14c-integration:v114
-        imagePullPolicy: IfNotPresent
+        image: 705370621539.dkr.ecr.us-west-2.amazonaws.com/pingcloud-services/p14c-integration:v114-pdo-3444-pf-sso-port3
+        imagePullPolicy: Always
         env:
           - name: NAMESPACE
             valueFrom:
@@ -62,7 +62,7 @@ spec:
           runAsNonRoot: true
           runAsUser: 9031
         image: public.ecr.aws/r2h3l6e4/bitnami/kubectl:1.15.3
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command:
         - /copy-dependencies.sh
         volumeMounts:
@@ -95,7 +95,7 @@ spec:
           runAsNonRoot: true
           runAsUser: 9031
         image: public.ecr.aws/r2h3l6e4/pingcloud-monitoring/newrelic-tags-exporter:v1.1.0
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: pingfederate-environment-variables
@@ -129,7 +129,7 @@ spec:
           runAsNonRoot: true
           runAsUser: 9031
         image: public.ecr.aws/r2h3l6e4/busybox:1.32
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command:
         - /wait-for-services.sh
         volumeMounts:
@@ -153,7 +153,7 @@ spec:
           runAsNonRoot: true
           runAsUser: 9031
           allowPrivilegeEscalation: false
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: OPERATIONAL_MODE
           value: CLUSTERED_ENGINE
@@ -251,7 +251,7 @@ spec:
         #   runAsNonRoot: true
         #   runAsUser: 9031
         image: public.ecr.aws/r2h3l6e4/pingcloud-monitoring/prometheus-json-exporter:0.3.0-v1.0.4
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
           - name: SERVICE_SHORTNAME
             value: pf
