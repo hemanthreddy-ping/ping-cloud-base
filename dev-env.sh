@@ -169,6 +169,8 @@
 #                           |                                                    |
 # LEGACY_LOGGING            | Flag indicating where we should send app logs -    | True
 #                           | to CloudWatch(if True) or to ELK (if False)        |
+#                           |                                                    |
+# EFS_ID                    | The EFS ID to mount.                               |
 ########################################################################################################################
 
 #
@@ -255,6 +257,8 @@ log "Initial MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 log "Initial LEGACY_LOGGING: ${LEGACY_LOGGING}"
 
+log "Initial EFS_ID: ${EFS_ID}"
+
 log "Initial PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
 log "Initial DEPLOY_FILE: ${DEPLOY_FILE}"
@@ -300,6 +304,8 @@ export PING_IDENTITY_DEVOPS_KEY="${PING_IDENTITY_DEVOPS_KEY:-ssm://pcpt/devops-l
 
 export LEGACY_LOGGING="${LEGACY_LOGGING:-True}"
 
+export EFS_ID="${EFS_ID:-}"
+
 # MySQL database names cannot have dashes. So transform dashes into underscores.
 ENV_NAME_NO_DASHES=$(echo ${BELUGA_ENV_NAME} | tr '-' '_')
 export MYSQL_DATABASE="pingcentral_${ENV_NAME_NO_DASHES}"
@@ -339,6 +345,8 @@ log "Using MYSQL_DATABASE: ${MYSQL_DATABASE}"
 log "Using PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
 log "Using LEGACY_LOGGING: ${LEGACY_LOGGING}"
+
+log "Using EFS_ID: ${EFS_ID}"
 
 log "Using DEPLOY_FILE: ${DEPLOY_FILE}"
 log "Using K8S_CONTEXT: ${K8S_CONTEXT}"
@@ -450,6 +458,8 @@ export PING_IDENTITY_DEVOPS_USER=${PING_IDENTITY_DEVOPS_USER}
 export PING_IDENTITY_DEVOPS_KEY=${PING_IDENTITY_DEVOPS_KEY}
 
 export LEGACY_LOGGING=${LEGACY_LOGGING}
+
+export EFS_ID=${EFS_ID}
 
 export PROJECT_DIR=${PWD}
 export AWS_PROFILE=${AWS_PROFILE:-csg}
