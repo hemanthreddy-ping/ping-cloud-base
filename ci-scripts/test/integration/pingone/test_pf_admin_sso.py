@@ -48,6 +48,7 @@ class TestPFAdminSSO(seleniumbase.BaseCase):
             self.type("#new", new_password)
             self.type("#verify", new_password)
             self.click('button[data-id="submit-button"]')
+        time.sleep(3)
         # "Welcome To Ping" pop-up for first time login
         if self.is_element_visible('button[data-id="guide-close-button"]'):
             self.click('button[data-id="guide-close-button"]')
@@ -63,6 +64,7 @@ class TestPFAdminSSO(seleniumbase.BaseCase):
         # Check if the PF Admin page can be accessed using SSO in a new window
         self.open_new_window()
         self.open(self.pf_admin_public_hostname)
+        self.save_screenshot_to_logs()
         if self.is_text_visible("Welcome to PingFederate"):
             self.click('a[data-id="content-link"]')
         self.assert_text_visible("Shortcuts")
