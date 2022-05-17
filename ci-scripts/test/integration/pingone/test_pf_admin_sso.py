@@ -58,6 +58,7 @@ class TestPFAdminSSO(seleniumbase.BaseCase):
         # The content frame on the home page displays the list of environments
         self.switch_to_frame("content-iframe")
         self.assert_text_visible("Your Environments", "div")
+        self.assertTrue(False)
 
     def test_pf_admin_user_can_access_pf_admin_page(self):
         self.pingone_login()
