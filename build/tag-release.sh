@@ -151,7 +151,7 @@ git checkout "${SOURCE_REF}"
 # updates yaml files docker images target tag name (v*.*.*.*_RC1) 
 # updates the ecr path to 'prod' from 'dev'
 #
-# eg: `build/tag-release.sh v1.14-release-branch v1.14.0.0_RC1`
+# eg: `build/tag-release.sh v1.14-release-branch v1.14.0.0_RC1 tag`
 #
 ###########################################################################################################################
 
@@ -188,15 +188,15 @@ else
   exit 1
 fi
 
-# echo "Test vathsalya"
-# pip3 install -r "${PWD_DIR}"/python/requirements.txt
-# PATCH_IMAGE=$(python3  "${PWD_DIR}"/python/src/Latest_Image_Manager.py)
-# echo "patch version is : ${PATCH_IMAGE}"
+echo "Test vathsalya"
+pip3 install -r "${PWD_DIR}"/python/requirements.txt
+PATCH_IMAGE=$(python3  "${PWD_DIR}"/python/src/Latest_Image_Manager.py)
+echo "patch version is : ${PATCH_IMAGE}"
 
 echo ---
 echo "Files that are different between origin/${SOURCE_REF} and ${TARGET_REF} refs:"
-# git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
-git diff  origin/"${SOURCE_REF}" "${TARGET_REF}"
+git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
+# git diff  origin/"${SOURCE_REF}" "${TARGET_REF}"
 
 echo ---
 
