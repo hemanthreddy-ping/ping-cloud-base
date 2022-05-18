@@ -121,6 +121,8 @@ fi
 SCRIPT_DIR=$(dirname "${0}")
 pushd "${SCRIPT_DIR}" &>/dev/null
 
+PWD_DIR=$(pwd)
+
 SANDBOX=$(mktemp -d)
 echo "Making modifications in sandbox directory ${SANDBOX}"
 
@@ -186,14 +188,20 @@ else
   exit 1
 fi
 
+# echo "Test vathsalya"
+# pip3 install -r "${PWD_DIR}"/python/requirements.txt
+# PATCH_IMAGE=$(python3  "${PWD_DIR}"/python/src/Latest_Image_Manager.py)
+# echo "patch version is : ${PATCH_IMAGE}"
+
 echo ---
 echo "Files that are different between origin/${SOURCE_REF} and ${TARGET_REF} refs:"
-git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
+# git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
+git diff  origin/"${SOURCE_REF}" "${TARGET_REF}"
 
 echo ---
 
 # Confirm before pushing the tag to the server
 read -n 1 -srp 'Press any key to continue'
-git push origin "${TARGET_REF}"
+# git push origin "${TARGET_REF}"
 
 popd &>/dev/null
