@@ -3,4 +3,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 namespace: kube-system
 
 resources:
-- efs-driver.yaml
+- github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.3
