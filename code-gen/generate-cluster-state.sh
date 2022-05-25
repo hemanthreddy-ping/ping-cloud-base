@@ -228,6 +228,9 @@
 #                          |                                                    |
 # LEGACY_LOGGING           | Flag indicating where we should send app logs -    | True
 #                          | to CloudWatch(if True) or to ELK (if False)        |
+#                          |                                                    |
+# EFS_ID                   | The EFS ID of the EFS used by the logging stack    | The SSM path:
+#                          |                                                    | ssm://pcpt/service/storage/efs/uri
 ########################################################################################################################
 
 #### SCRIPT START ####
