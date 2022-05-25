@@ -646,7 +646,7 @@ if test "${CURRENT_GIT_BRANCH}" = 'HEAD'; then
 fi
 
 # Retrieve EFS id from ssm
-TMP_EFS_ID=$(get_ssm_value "ssm://pcpt/devops-license/key/efs_id")
+TMP_EFS_ID=$(get_ssm_value "ssm://pcpt/service/storage/efs/uri")
 EFS_ID="${EFS_ID:-$TMP_EFS_ID}"
 export EFS_ID
 
