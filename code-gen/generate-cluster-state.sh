@@ -574,6 +574,8 @@ echo "Initial MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 echo "Initial LEGACY_LOGGING: ${LEGACY_LOGGING}"
 
+echo "Initial EFS_ID: ${EFS_ID}"
+
 echo "Initial PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
 echo "Initial K8S_GIT_URL: ${K8S_GIT_URL}"
@@ -643,6 +645,11 @@ if test "${CURRENT_GIT_BRANCH}" = 'HEAD'; then
   CURRENT_GIT_BRANCH=$(git describe --tags --always)
 fi
 
+# Retrieve EFS id from ssm
+TMP_EFS_ID=$(get_ssm_value "ssm://pcpt/devops-license/key/efs_id")
+EFS_ID="${EFS_ID:-$TMP_EFS_ID}"
+export EFS_ID
+
 export CLUSTER_STATE_REPO_URL=${CLUSTER_STATE_REPO_URL:-https://github.com/pingidentity/ping-cloud-base}
 CLUSTER_STATE_REPO_NAME="${CLUSTER_STATE_REPO_URL##*/}"
 
@@ -689,6 +696,8 @@ echo "Using MYSQL_USER: ${MYSQL_USER}"
 echo "Using MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 echo "Using LEGACY_LOGGING: ${LEGACY_LOGGING}"
+
+echo "Using EFS_ID: ${EFS_ID}"
 
 echo "Using PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
