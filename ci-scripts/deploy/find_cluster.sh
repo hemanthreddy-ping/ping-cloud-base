@@ -62,10 +62,6 @@ find_cluster() {
         log "Found cluster $SELECTED_KUBE_NAME available to deploy to"
         echo "SELECTED_POSTFIX=$SELECTED_POSTFIX" > cluster.env
         echo "SELECTED_KUBE_NAME=$SELECTED_KUBE_NAME" >> cluster.env
-        EFS_ID=$(aws efs describe-file-systems \
-                --query "FileSystems[?Name=='${SELECTED_KUBE_NAME}'].FileSystemId|[]" \
-                --output text)
-        echo "EFS_ID=$EFS_ID" >> cluster.env
         set_deploy_type_env_vars
         set_env_vars
         break
