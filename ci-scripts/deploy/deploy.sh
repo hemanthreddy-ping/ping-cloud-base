@@ -14,9 +14,11 @@ pushd "${PROJECT_DIR}"
 
 NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY:-unused}
 
+echo "Looking for EFS for ${SELECTED_KUBE_NAME}"
 EFS_ID=$(aws efs describe-file-systems \
         --query "FileSystems[?Name=='${SELECTED_KUBE_NAME}'].FileSystemId|[]" \
         --output text)
+echo "EFS_ID is ${EFS_ID}"
 export EFS_ID
 
 export NEW_RELIC_LICENSE_KEY_BASE64=$(base64_no_newlines "${NEW_RELIC_LICENSE_KEY}")
