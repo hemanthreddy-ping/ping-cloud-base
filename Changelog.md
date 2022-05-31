@@ -9,13 +9,17 @@
 - Create PingDirectory's Password Credential Validator using PingFederate Admin API
 - Grafana upgraded from v6.5.3 to v8.4.5
 - Create PingDirectory's LDAP Client Manager using PingFederate Admin API
-- Replace Fluentd with Fluent-bit
+- Replace Fluentd with Fluent Bit
 - Force liveness probe for PingDirectory to use API endpoint /available-or-degraded-state
-- Logstash now getting logs from FluentBit and working as non-root Deployment
-- FluentBit now has a FeatureFlag 'LEGACY_LOGGING' to control application logs destination
+- Logstash now getting logs from Fluent Bit and working as non-root Deployment
+- Fluent Bit now has a FeatureFlag 'LEGACY_LOGGING' to control application logs destination
+- Fluent Bit docker image is now pulled from ECR
+- Implemented Hot\Warm Tiers for ElasticSearch 
+- Add "pf-jwt-token-translator-1.1.1.2.jar" to artifact.json file
 
 _Changes:_
 
+- [X] PDO-3942 Moved ENVIRONMENT_PREFIX from base env_vars to region env_vars
 - [X] PDO-3844 Update cluster tools to latest version: sig-sci agent v4.28.0
 - [X] PDO-3270 Update cluster tools to latest version: nginx-ingress-controller v1.2.0
 - [X] PDO-2517 Port of PingFederate pre-config script from bash to python
@@ -34,15 +38,26 @@ _Changes:_
 - [X] PDO-3571 Added non-admin ArgoCD user with access to restart StatefulSet pods
 - [X] PDO-3582 Force liveness probe to use API endpoint /available-or-degraded-state
 - [X] PDO-3605 Automate release candidate ECR images within in ping-cloud-base
+- [X] PDO-3610 Convert PingDataSync to a Statefulset
 - [X] PDO-3620 Update cluster tools to latest version: Grafana v8.4.5
+- [X] PDO-3678 server.publicBaseUrl is not found in Kibana
+- [X] PDO-3716 Elasticsearch: Implement Hot/Warm Tiers
 - [X] PDO-3723 Grafana: Upgrade to 8.4.5 risks investigation
 - [X] PDO-3743 Automate development ECR images in ping-cloud-base
 - [X] PDO-3745 Argocd admin creds in secrets.yaml
-- [X] PDO-3753 Configure FluentBit to send SIEM logs to logstash
+- [X] PDO-3753 Configure Fluent Bit to send SIEM logs to logstash
 - [X] PDO-3754 Replace current logstash DaemonSet by non-root Deployment
-- [X] PDO-3755 Implement FeatureFlags with many outputs for FluentBit
+- [X] PDO-3755 Implement FeatureFlags with many outputs for Fluent Bit
 - [X] PDO-3773 Encrypt K8s StorageClass (AWS EBS volumes)
 - [X] PDO-3856 PingOne configurator skips is_myping
+- [X] PDO-3892 Fluent Bit image is now pulled from ECR
+- [X] PDO-3913 Few data views are listed twice in Kibana Discover tab
+- [X] PDO-3936 Investigate flaky PingOne integration tests
+- [X] PDO-3930 Add "pf-jwt-token-translator-1.1.1.2.jar" to artifact.json file
+- [X] PDO-3933 ELK/CloudWatch logging improvements
+- [X] PDO-3946 Some of Kibana resources bootstrapping fails in rare cases
+- [X] PDO-3956 ELK: there are no log time chart and no window to choose time slot for 'pa-was-system' data view
+- [X] PDO-3959 Fix URLs not rendering due to DNS_ZONE envsubst ordering
 
 ### 1.13.0
 
