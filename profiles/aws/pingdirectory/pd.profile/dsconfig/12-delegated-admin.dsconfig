@@ -125,7 +125,7 @@ dsconfig set-http-servlet-extension-prop \
 #
 dsconfig create-delegated-admin-rights \
   --rights-name "administrator-user-${DA_IMPLICIT_GRANT_TYPE_CLIENT_ID}" \
-  --set "admin-user-dn:uid=calvin,${USER_BASE_DN}" \
+  --set "admin-user-dn:uid=admin,${USER_BASE_DN}" \
   --set enabled:true
 
 #
