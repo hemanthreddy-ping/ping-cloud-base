@@ -94,6 +94,7 @@ ${SSH_ID_KEY_BASE64}
 ${IS_MULTI_CLUSTER}
 ${PLATFORM_EVENT_QUEUE_NAME}
 ${ORCH_API_SSM_PATH_PREFIX}
+${SERVICE_SSM_PATH_PREFIX}
 ${REGION}
 ${REGION_NICK_NAME}
 ${PRIMARY_REGION}
@@ -166,8 +167,7 @@ ${PINGDATASYNC_IMAGE_TAG}
 ${IRSA_PING_ANNOTATION_KEY_VALUE}
 ${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}
 ${DATASYNC_P1AS_SYNC_SERVER}
-${LEGACY_LOGGING}
-${EFS_ID}'
+${LEGACY_LOGGING}'
 
 ########################################################################################################################
 # Export some derived environment variables.

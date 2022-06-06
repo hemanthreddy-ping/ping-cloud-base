@@ -169,8 +169,6 @@
 #                           |                                                    |
 # LEGACY_LOGGING            | Flag indicating where we should send app logs -    | True
 #                           | to CloudWatch(if True) or to ELK (if False)        |
-#                           |                                                    |
-# EFS_ID                    | The EFS ID to mount.                               |
 ########################################################################################################################
 
 #
@@ -235,6 +233,7 @@ log "Initial IS_MULTI_CLUSTER: ${IS_MULTI_CLUSTER}"
 log "Initial TOPOLOGY_DESCRIPTOR_FILE: ${TOPOLOGY_DESCRIPTOR_FILE}"
 log "Initial PLATFORM_EVENT_QUEUE_NAME: ${PLATFORM_EVENT_QUEUE_NAME}"
 log "Initial ORCH_API_SSM_PATH_PREFIX: ${ORCH_API_SSM_PATH_PREFIX}"
+log "Initial SERVICE_SSM_PATH_PREFIX: ${SERVICE_SSM_PATH_PREFIX}"
 log "Initial REGION: ${REGION}"
 log "Initial REGION_NICK_NAME: ${REGION_NICK_NAME}"
 log "Initial PRIMARY_REGION: ${PRIMARY_REGION}"
@@ -257,8 +256,6 @@ log "Initial MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 log "Initial LEGACY_LOGGING: ${LEGACY_LOGGING}"
 
-log "Initial EFS_ID: ${EFS_ID}"
-
 log "Initial PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
 log "Initial DEPLOY_FILE: ${DEPLOY_FILE}"
@@ -277,6 +274,7 @@ export IS_MULTI_CLUSTER="${IS_MULTI_CLUSTER}"
 
 export PLATFORM_EVENT_QUEUE_NAME="${PLATFORM_EVENT_QUEUE_NAME:-v2_platform_event_queue.fifo}"
 export ORCH_API_SSM_PATH_PREFIX="${ORCH_API_SSM_PATH_PREFIX:-/pcpt/orch-api}"
+export SERVICE_SSM_PATH_PREFIX="${SERVICE_SSM_PATH_PREFIX:-/pcpt/service}"
 
 export REGION="${REGION:-us-east-2}"
 export REGION_NICK_NAME="${REGION_NICK_NAME:-${REGION}}"
@@ -304,8 +302,6 @@ export PING_IDENTITY_DEVOPS_KEY="${PING_IDENTITY_DEVOPS_KEY:-ssm://pcpt/devops-l
 
 export LEGACY_LOGGING="${LEGACY_LOGGING:-True}"
 
-export EFS_ID="${EFS_ID:-}"
-
 # MySQL database names cannot have dashes. So transform dashes into underscores.
 ENV_NAME_NO_DASHES=$(echo ${BELUGA_ENV_NAME} | tr '-' '_')
 export MYSQL_DATABASE="pingcentral_${ENV_NAME_NO_DASHES}"
@@ -321,6 +317,7 @@ log "Using IS_MULTI_CLUSTER: ${IS_MULTI_CLUSTER}"
 log "Using TOPOLOGY_DESCRIPTOR_FILE: ${TOPOLOGY_DESCRIPTOR_FILE}"
 log "Using PLATFORM_EVENT_QUEUE_NAME: ${PLATFORM_EVENT_QUEUE_NAME}"
 log "Using ORCH_API_SSM_PATH_PREFIX: ${ORCH_API_SSM_PATH_PREFIX}"
+log "Using SERVICE_SSM_PATH_PREFIX: ${SERVICE_SSM_PATH_PREFIX}"
 log "Using REGION: ${REGION}"
 log "Using REGION_NICK_NAME: ${REGION_NICK_NAME}"
 log "Using PRIMARY_REGION: ${PRIMARY_REGION}"
@@ -345,8 +342,6 @@ log "Using MYSQL_DATABASE: ${MYSQL_DATABASE}"
 log "Using PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
 log "Using LEGACY_LOGGING: ${LEGACY_LOGGING}"
-
-log "Using EFS_ID: ${EFS_ID}"
 
 log "Using DEPLOY_FILE: ${DEPLOY_FILE}"
 log "Using K8S_CONTEXT: ${K8S_CONTEXT}"
@@ -453,13 +448,12 @@ export MYSQL_DATABASE=${MYSQL_DATABASE}
 
 export PLATFORM_EVENT_QUEUE_NAME=${PLATFORM_EVENT_QUEUE_NAME}
 export ORCH_API_SSM_PATH_PREFIX=${ORCH_API_SSM_PATH_PREFIX}
+export SERVICE_SSM_PATH_PREFIX=${SERVICE_SSM_PATH_PREFIX}
 
 export PING_IDENTITY_DEVOPS_USER=${PING_IDENTITY_DEVOPS_USER}
 export PING_IDENTITY_DEVOPS_KEY=${PING_IDENTITY_DEVOPS_KEY}
 
 export LEGACY_LOGGING=${LEGACY_LOGGING}
-
-export EFS_ID=${EFS_ID}
 
 export PROJECT_DIR=${PWD}
 export AWS_PROFILE=${AWS_PROFILE:-csg}

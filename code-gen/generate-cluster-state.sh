@@ -209,6 +209,9 @@
 # ORCH_API_SSM_PATH_PREFIX | The prefix of the SSM path that contains MyPing    | /pcpt/orch-api
 #                          | state data required for the P14C/P1AS integration. |
 #                          |                                                    |
+# SERVICE_SSM_PATH_PREFIX  | The prefix of the SSM path that contains service   | /pcpt/service
+#                          | state data required for the P14C/P1AS integration. |
+#                          |                                                    |
 # NEW_RELIC_LICENSE_KEY    | The key of NewRelic APM Agent used to send data to | The string "unused".
 #                          | NewRelic account.                                  |
 #                          |                                                    |
@@ -228,9 +231,6 @@
 #                          |                                                    |
 # LEGACY_LOGGING           | Flag indicating where we should send app logs -    | True
 #                          | to CloudWatch(if True) or to ELK (if False)        |
-#                          |                                                    |
-# EFS_ID                   | The EFS ID of the EFS used by the logging stack    | The SSM path:
-#                          |                                                    | ssm://pcpt/service/storage/efs/uri
 ########################################################################################################################
 
 #### SCRIPT START ####
@@ -272,6 +272,7 @@ ${SSH_ID_KEY_BASE64}
 ${IS_MULTI_CLUSTER}
 ${PLATFORM_EVENT_QUEUE_NAME}
 ${ORCH_API_SSM_PATH_PREFIX}
+${SERVICE_SSM_PATH_PREFIX}
 ${REGION}
 ${REGION_NICK_NAME}
 ${PRIMARY_REGION}
@@ -554,6 +555,7 @@ echo "Initial SIZE: ${SIZE}"
 echo "Initial IS_MULTI_CLUSTER: ${IS_MULTI_CLUSTER}"
 echo "Initial PLATFORM_EVENT_QUEUE_NAME: ${PLATFORM_EVENT_QUEUE_NAME}"
 echo "Initial ORCH_API_SSM_PATH_PREFIX: ${ORCH_API_SSM_PATH_PREFIX}"
+echo "Initial SERVICE_SSM_PATH_PREFIX: ${SERVICE_SSM_PATH_PREFIX}"
 echo "Initial REGION: ${REGION}"
 echo "Initial REGION_NICK_NAME: ${REGION_NICK_NAME}"
 echo "Initial PRIMARY_REGION: ${PRIMARY_REGION}"
@@ -576,8 +578,6 @@ echo "Initial MYSQL_USER: ${MYSQL_USER}"
 echo "Initial MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 echo "Initial LEGACY_LOGGING: ${LEGACY_LOGGING}"
-
-echo "Initial EFS_ID: ${EFS_ID}"
 
 echo "Initial PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
@@ -609,6 +609,7 @@ export ARTIFACT_REPO_URL="${ARTIFACT_REPO_URL:-unused}"
 
 export PLATFORM_EVENT_QUEUE_NAME=${PLATFORM_EVENT_QUEUE_NAME:-v2_platform_event_queue.fifo}
 export ORCH_API_SSM_PATH_PREFIX=${ORCH_API_SSM_PATH_PREFIX:-/pcpt/orch-api}
+export SERVICE_SSM_PATH_PREFIX=${SERVICE_SSM_PATH_PREFIX:-/pcpt/service}
 
 export LAST_UPDATE_REASON="${LAST_UPDATE_REASON:-NA}"
 
@@ -648,11 +649,6 @@ if test "${CURRENT_GIT_BRANCH}" = 'HEAD'; then
   CURRENT_GIT_BRANCH=$(git describe --tags --always)
 fi
 
-# Retrieve EFS id from ssm
-TMP_EFS_ID=$(get_ssm_value "ssm://pcpt/service/storage/efs/uri")
-EFS_ID="${EFS_ID:-$TMP_EFS_ID}"
-export EFS_ID
-
 export CLUSTER_STATE_REPO_URL=${CLUSTER_STATE_REPO_URL:-https://github.com/pingidentity/ping-cloud-base}
 CLUSTER_STATE_REPO_NAME="${CLUSTER_STATE_REPO_URL##*/}"
 
@@ -679,6 +675,7 @@ echo "Using SIZE: ${SIZE}"
 echo "Using IS_MULTI_CLUSTER: ${IS_MULTI_CLUSTER}"
 echo "Using PLATFORM_EVENT_QUEUE_NAME: ${PLATFORM_EVENT_QUEUE_NAME}"
 echo "Using ORCH_API_SSM_PATH_PREFIX: ${ORCH_API_SSM_PATH_PREFIX}"
+echo "Using SERVICE_SSM_PATH_PREFIX: ${SERVICE_SSM_PATH_PREFIX}"
 echo "Using REGION: ${REGION}"
 echo "Using REGION_NICK_NAME: ${REGION_NICK_NAME}"
 echo "Using PRIMARY_REGION: ${PRIMARY_REGION}"
@@ -699,8 +696,6 @@ echo "Using MYSQL_USER: ${MYSQL_USER}"
 echo "Using MYSQL_PASSWORD: ${MYSQL_PASSWORD}"
 
 echo "Using LEGACY_LOGGING: ${LEGACY_LOGGING}"
-
-echo "Using EFS_ID: ${EFS_ID}"
 
 echo "Using PING_IDENTITY_DEVOPS_USER: ${PING_IDENTITY_DEVOPS_USER}"
 
