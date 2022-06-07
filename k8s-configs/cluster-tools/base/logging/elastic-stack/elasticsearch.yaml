@@ -216,10 +216,10 @@ spec:
         app: elasticsearch
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: elasticsearch-efs
+      storageClassName: efs
       resources:
         requests:
-          storage: 40Gi
+          storage: 1Mi
 
 ---
 kind: Service
@@ -272,15 +272,3 @@ mountOptions:
   - discard
 allowVolumeExpansion: true
 
-#---
-#apiVersion: storage.k8s.io/v1
-#kind: StorageClass
-#metadata:
-#  name: elasticsearch-efs
-#  labels:
-#    app: elasticsearch
-#provisioner: efs.csi.aws.com
-#parameters:
-#  provisioningMode: efs-ap
-#  fileSystemId: efs_id
-#  directoryPerms: "700"
