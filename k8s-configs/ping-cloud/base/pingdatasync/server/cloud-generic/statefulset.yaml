@@ -242,7 +242,7 @@ spec:
           secret:
             secretName: pingdatasync-passwords
             optional: true
-            defaultMode: 0400
+            defaultMode: 0440
         - name: pingdirectory-license
           secret:
             secretName: pingdirectory-license

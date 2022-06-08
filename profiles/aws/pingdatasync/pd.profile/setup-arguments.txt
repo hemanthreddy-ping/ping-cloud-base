@@ -29,4 +29,4 @@
     --enableStartTLS \
     --maxHeapSize "${MAX_HEAP_SIZE}" --jvmTuningParameter AGGRESSIVE \
     --generateSelfSignedCertificate \
-    --encryptDataWithRandomPassphrase
+    --encryptDataWithPassphraseFromFile "${ENCRYPTION_PASSWORD_FILE}"

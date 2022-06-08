@@ -34,6 +34,8 @@ K8S_TAIL_LOG_FILES=/opt/out/instance/logs/access /opt/out/instance/logs/errors /
 # PingDataSync server information
 ROOT_BIND_DN=cn=administrator
 ROOT_USER_PASSWORD_FILE=/usr/local/secrets/root-user-password
+ENCRYPTION_PASSWORD_FILE=/usr/local/secrets/encryption-password
+SECRETS_DIR=/usr/local/secrets
 
 # External PingDirectory server information
 EXT_PD_ADMIN_BIND_DN=cn=administrator
