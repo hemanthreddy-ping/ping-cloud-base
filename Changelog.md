@@ -60,6 +60,7 @@ _Changes:_
 - [X] PDO-3843 Update cluster tools to latest version: cloudwatch-agent to v1.247352.0
 - [X] PDO-3856 PingOne configurator skips is_myping
 - [X] PDO-3892 Fluent Bit image is now pulled from ECR
+- [X] PDO-3907 Create Cluster Health Tests for Health Checks Pt 1
 - [X] PDO-3910 Create a logstash parsers for all ping-app non-SIEM logs
 - [X] PDO-3913 Few data views are listed twice in Kibana Discover tab
 - [X] PDO-3936 Investigate flaky PingOne integration tests
