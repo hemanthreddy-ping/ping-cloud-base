@@ -10,7 +10,7 @@ spec:
     spec:
       template:
         spec:
-          serviceAccountName: ping-serviceaccount
+          serviceAccountName: ping-cluster-serviceaccount
           restartPolicy: Never
           containers:
           - name: healthcheck-cluster-health
