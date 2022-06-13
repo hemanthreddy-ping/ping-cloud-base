@@ -7,7 +7,14 @@ SLEEP_SECONDS=${INITIAL_DELAY_SECONDS:-0}
 beluga_log "Initial delay: ${SLEEP_SECONDS}"
 sleep "${SLEEP_SECONDS}"
 
-SYNC_SERVERS="${P1AS_PD_POD_NAME}.${P1AS_PD_CLUSTER_PRIVATE_HOSTNAME}:${P1AS_PD_LDAPS_PORT}"
+PORT="${P1AS_PD_LDAPS_PORT}" # default wait on PingDirectory LDAPS port
+
+# If DISABLE_CERT_AUTOMATION is set then force PingDirectory to wait for insecure LDAAP port
+if [ "${DISABLE_CERT_AUTOMATION}" = "true" ]; then
+  PORT="${P1AS_PD_LDAP_PORT}"
+fi
+
+SYNC_SERVERS="${P1AS_PD_POD_NAME}.${P1AS_PD_CLUSTER_PRIVATE_HOSTNAME}:${PORT}"
 
 # Append external PingDirectory host ldap and https if IS_P1AS_TEST_MODE is true.
 if [ "${IS_P1AS_TEST_MODE}" = "true" ]; then

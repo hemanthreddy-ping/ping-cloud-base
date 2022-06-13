@@ -79,6 +79,11 @@ spec:
             mountPath: /logger.lib.sh
             subPath: logger.lib.sh
         env:
+          - name: P1AS_PD_LDAP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: pingdirectory-environment-variables
+                key: LDAP_PORT
           - name: P1AS_PD_LDAPS_PORT
             valueFrom:
               configMapKeyRef:
@@ -145,6 +150,11 @@ spec:
               secretKeyRef:
                 name: pingdirectory-passwords
                 key: root-user-password
+          - name: P1AS_PD_LDAP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: pingdirectory-environment-variables
+                key: LDAP_PORT
           - name: P1AS_PD_LDAPS_PORT
             valueFrom:
               configMapKeyRef:
