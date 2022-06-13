@@ -187,7 +187,7 @@ elif test "${REF_TYPE}" = 'tag'; then
   # Update 'base/env_vars' image tags and yaml files
   pip3 install -r "${PWD_DIR}"/python/requirements.txt > /dev/null
   replace_and_commit "${SOURCE_REF}-latest" "${TARGET_REF}" "${REF_TYPE}"
-#  git tag "${TARGET_REF}"
+  git tag "${TARGET_REF}"
 
 else
   usage
@@ -196,13 +196,12 @@ fi
 
 echo ---
 echo "Files that are different between origin/${SOURCE_REF} and ${TARGET_REF} refs:"
-#git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
-git diff  origin/"${SOURCE_REF}" "${TARGET_REF}"
+git diff --name-only origin/"${SOURCE_REF}" "${TARGET_REF}"
 
 echo ---
 
 # Confirm before pushing the tag to the server
 read -n 1 -srp 'Press any key to continue'
-# git push origin "${TARGET_REF}"
+git push origin "${TARGET_REF}"
 
 popd &>/dev/null
