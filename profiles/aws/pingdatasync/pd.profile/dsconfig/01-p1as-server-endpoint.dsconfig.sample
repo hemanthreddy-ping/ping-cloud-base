@@ -10,6 +10,6 @@ dsconfig create-external-server \
   --set "bind-dn:${P1AS_PD_SYNC_BIND_DN}" \
   --set "password:${P1AS_PD_SYNC_BIND_DN_PASSWORD}" \
   --set key-manager-provider:Null \
-  --set trust-manager-provider:Null \
+  --set trust-manager-provider:JKS \
   --set initial-connections:${P1AS_PD_HOST_INITIAL_CONNECTIONS} \
   --set max-connections:${P1AS_PD_HOST_MAX_CONNECTIONS}
