@@ -48,6 +48,17 @@ spec:
         envFrom:
           - configMapRef:
               name: pingdatasync-environment-variables
+        env:
+          - name: P1AS_PD_LDAP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: pingdirectory-environment-variables
+                key: LDAP_PORT
+          - name: P1AS_PD_LDAPS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: pingdirectory-environment-variables
+                key: LDAPS_PORT
       - name: pingdatasync-init
         # FIXME PDO-3574: switch to same user as app
         securityContext:
@@ -78,17 +89,6 @@ spec:
           - name: pingdatasync-init
             mountPath: /logger.lib.sh
             subPath: logger.lib.sh
-        env:
-          - name: P1AS_PD_LDAP_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: pingdirectory-environment-variables
-                key: LDAP_PORT
-          - name: P1AS_PD_LDAPS_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: pingdirectory-environment-variables
-                key: LDAPS_PORT
         envFrom:
           - configMapRef:
               name: pingdatasync-environment-variables
