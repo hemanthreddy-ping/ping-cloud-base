@@ -58,8 +58,6 @@ EXT_PD_HTTPS_PORT=1443
 # P1AS PingDirectory server information
 P1AS_PD_POD_NAME=pingdirectory-0
 P1AS_PD_CLUSTER_PRIVATE_HOSTNAME=pingdirectory
-P1AS_PD_LDAPS_PORT=1636
-P1AS_PD_LDAP_PORT=1389
 
 # Configurable connections to P1AS PD pod
 P1AS_PD_HOST_INITIAL_CONNECTIONS=1
