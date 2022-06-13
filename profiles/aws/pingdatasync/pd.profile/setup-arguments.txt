@@ -18,6 +18,7 @@
 # argument can be used to encrypt data with a randomly generated key.
     --acceptLicense \
     --verbose \
+    --licenseKeyFile "${LICENSE_KEY_FILE}" \
     --location "${REGION}" \
     --instanceName "${PINGDATASYNC_POD_NAME}.${PINGDATASYNC_POD_NAMESPACE}" \
     --ldapPort ${LDAP_PORT} \
