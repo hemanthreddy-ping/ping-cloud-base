@@ -117,12 +117,6 @@ spec:
           periodSeconds: 30
           failureThreshold: 5
           timeoutSeconds: 5
-        # Backup config/sync-state.ldif to s3 before terminating pod
-        lifecycle:
-          preStop:
-            exec:
-              command:
-                - /opt/staging/hooks/15-upload-sync-state-s3.sh
         ports:
           - name: ldap
             containerPort: 1389
