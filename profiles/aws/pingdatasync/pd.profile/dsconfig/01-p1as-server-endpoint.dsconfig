@@ -1,6 +1,6 @@
 #
 # Create (P1AS) PD server endpoint
-# --set connection-security:ssl
+#
 #
 dsconfig create-external-server \
   --server-name external_p1as_pd_server \
@@ -9,6 +9,7 @@ dsconfig create-external-server \
   --type ping-identity-ds \
   --set "bind-dn:${P1AS_PD_SYNC_BIND_DN}" \
   --set "password:${P1AS_PD_SYNC_BIND_DN_PASSWORD}" \
+  --set connection-security:none \
   --set key-manager-provider:Null \
   --set trust-manager-provider:JKS \
   --set initial-connections:${P1AS_PD_HOST_INITIAL_CONNECTIONS} \
