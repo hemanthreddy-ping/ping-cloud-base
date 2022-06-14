@@ -1,9 +1,7 @@
 import logging
 import os
 import sys
-
 import boto3
-from git import Repo
 
 
 def set_up_logger(name):
@@ -21,19 +19,6 @@ def set_up_logger(name):
 logger = set_up_logger(__name__)
 
 
-def get_root_dir() -> str:
-    """
-    Get root dir of the repository
-
-    Returns:
-        str: Root directory of the repository
-    """
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_name = "ping-cloud-docker"
-    root_dir = file_dir.split(repo_name)[0] + repo_name
-    return root_dir
-
-
 def get_branch(root_dir) -> str:
     """
     Get the current branch name
@@ -46,9 +31,6 @@ def get_branch(root_dir) -> str:
     """
     if check_in_gitlab():
         return os.environ.get("CI_COMMIT_REF_NAME")
-    else:
-        pcd_repo = Repo(root_dir)
-        return str(pcd_repo.active_branch)
 
 
 def get_boto_session() -> boto3.session.Session:

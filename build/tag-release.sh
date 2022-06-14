@@ -52,7 +52,7 @@ replace_and_commit() {
     "p14c-bootstrap"
     "p14c-integration"
     "metadata"
-#    "healthcheck"
+    "healthcheck"
     "ansible-beluga"
   )
 
@@ -64,8 +64,8 @@ replace_and_commit() {
     echo "Changing values for ${image} in expected files"
 
     if test "${ref_value}" = 'tag'; then
-      # If tag, search repository for latest image
-      target_image=$(python3  "${PWD_DIR}"/python/src/get_latest_image.py "${image_repo}/${image}" ${target_value})
+      # If tag, search registry for latest image version
+      target_image=$(python3 "${PWD_DIR}"/python/src/get_latest_image.py "${image_repo}/${image}" ${target_value})
     else
       # If branch, use target value
       target_image="${target_value}"

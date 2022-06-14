@@ -24,10 +24,6 @@ class LatestImageManager:
 
         self.orig_gitlab_name = orig_gitlab_name
         self.repository_name = repository_name
-        if "RC" in self.orig_gitlab_name:
-            self.rc_regex_addon = "_RC([0-9]+)"
-        else:
-            self.rc_regex_addon = ""
 
         # Extract infrastructure version | beluga major version |
         # ping-cloud-base patch | ping-cloud-docker patch from Gitlab tag
@@ -41,13 +37,21 @@ class LatestImageManager:
         self.client = boto_session.client("ecr-public", config=config)
 
     def regex_for_image_within_specific_release(self):
-        return f"({self.infrastructure_version_num})\.({self.beluga_major_version_num})\.({self.pcb_patch_num})\.([0-9]+){self.rc_regex_addon}$"
+        if "RC" in self.orig_gitlab_name:
+            # We only care about the infrastructure version & beluga major version
+            return f"({self.infrastructure_version_num})\.({self.beluga_major_version_num})\.([0-9]+)\.([0-9]+)_RC([0-9]+)$"
+        else:
+            # We care about the infrastructure version, beluga major version, & the beluga patch version
+            return f"({self.infrastructure_version_num})\.({self.beluga_major_version_num})\.({self.pcb_patch_num})\.([0-9]+)$"
 
     def normalize_gitlab_tag(self):
         """
           Extract infrastructure version | beluga major version from gitlab tag name.
         """
-        gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX+self.rc_regex_addon, self.orig_gitlab_name)
+        if "RC" in self.orig_gitlab_name:
+            gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX + "_RC([0-9]+)", self.orig_gitlab_name)
+        else:
+            gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX, self.orig_gitlab_name)
 
         if gitlab_tag_name is None:
             raise Exception(f"Unexpected Results: Invalid Gitlab tag name - {self.orig_gitlab_name}")
@@ -57,7 +61,7 @@ class LatestImageManager:
         gitlab_major_version_num = int(gitlab_tag_name.group(2))
         gitlab_pcb_patch_num = int(gitlab_tag_name.group(3))
 
-        # Return integers: infrastructure version | beluga major version
+        # Return integers: infrastructure version | beluga major version | pcb patch num
         return [gitlab_infrastructure_version_num, gitlab_major_version_num, gitlab_pcb_patch_num]
 
     def get_all_images_in_detail(self):
@@ -102,15 +106,15 @@ class LatestImageManager:
                 if image_tag_name is not None:
                     # Extract semantic version into a list as "version_list"
                     # e.g.
-                    # image_tag_name => v1.14.0.0
-                    # image_version_list  => [1, 14, 0, 0]
+                    # image_tag_name v1.14.0.0 => image_version_list [1, 14, 0, 0, 0]
+                    # image_tag_name v1.14.0.0_RC1 => image_version_list [1, 14, 0, 0, RC1]
                     # image_version_list will be used by python's sort method later.
                     image_infrastructure_version_num = int(image_tag_name.group(1))
                     image_beluga_major_version_num = int(image_tag_name.group(2))
                     image_ping_cloud_base_patch = int(image_tag_name.group(3))
                     image_ping_cloud_docker_patch = int(image_tag_name.group(4))
                     if "RC" in self.orig_gitlab_name:
-                        image_ping_cloud_rc_num = int(image_tag_name.group(5).replace("_RC", ""))
+                        image_ping_cloud_rc_num = int(image_tag_name.group(5))
                     else:
                         image_ping_cloud_rc_num = 0
 
@@ -143,5 +147,4 @@ if __name__ == '__main__':
     tag = sys.argv[2]
 
     lim = LatestImageManager(tag, repo_name)
-    # lim = LatestImageManager("v999.0.0.0_RC1", "pingcloud-apps/pingdirectory")
     print(lim.get_latest_image())
