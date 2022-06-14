@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-health
+data:
+  cluster-health: |-
+    #!/bin/bash
+    set -e
+    
+    ./robot_wrapper.sh cluster-health.xml "--include cluster-health tests/cluster-health"
+
+---
+
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -22,9 +35,16 @@ spec:
               runAsUser: 9031
               allowPrivilegeEscalation: false
             command:
-              - /bin/bash
-              - -c
-              - ./robot_wrapper.sh cluster-health.xml "--include cluster-health tests/cluster-health"
+            - /opt/in/cluster-health
             envFrom:
             - configMapRef:
                 name: pingcloud-healthcheck-environment-variables
+            volumeMounts:
+            - name: cluster-health
+              mountPath: /opt/in/cluster-health
+              subPath: cluster-health
+          volumes:
+          - name: cluster-health
+            configMap:
+              name: cluster-health
+              defaultMode: 0555
