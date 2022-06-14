@@ -1,7 +1,7 @@
 # Changelog
 
 ### 1.14.0
-
+- Update cluster-tool external-dns from version v0.08.0 to version v.0.11.0
 - New image tagging convention for all Ping applications
 - SigSci Agent upgraded from v4.24.1 to v4.28.0
 - Nginx Ingress Controller upgraded from v1.0.0 to v1.2.0
@@ -16,9 +16,11 @@
 - Fluent Bit docker image is now pulled from ECR
 - Implemented Hot\Warm Tiers for ElasticSearch 
 - Add "pf-jwt-token-translator-1.1.1.2.jar" to artifact.json file
+- Add healthcheck service
+- Add logstash parsers for all ping apps
 
 _Changes:_
-
+- [X] PDO-3274 Update cluster tools to recommended version: external-dns v.11.0
 - [X] PDO-3942 Moved ENVIRONMENT_PREFIX from base env_vars to region env_vars
 - [X] PDO-3844 Update cluster tools to latest version: sig-sci agent v4.28.0
 - [X] PDO-3270 Update cluster tools to latest version: nginx-ingress-controller v1.2.0
@@ -30,6 +32,7 @@ _Changes:_
 - [X] PDO-3279 Update cluster tools to latest version: Logstash v8.1.3
 - [X] PDO-3421 Set ImagePullPolicy for all Ping apps to 'Always'
 - [X] PDO-3422 Create script to ensure development ECR public image tag isn't in any production release
+- [X] PDO-3428 PA/PF heartbeat exporter doesn't export metric properly after implementing PDO-3207
 - [X] PDO-3433 Create PingDirectory's Password Credential Validator using PingFederate Admin API
 - [X] PDO-3434 Create PingDirectory's LDAP Client Manager using PingFederate Admin API
 - [X] PDO-3446 Upgraded ArgoCD to v2.3.1
@@ -49,8 +52,12 @@ _Changes:_
 - [X] PDO-3754 Replace current logstash DaemonSet by non-root Deployment
 - [X] PDO-3755 Implement FeatureFlags with many outputs for Fluent Bit
 - [X] PDO-3773 Encrypt K8s StorageClass (AWS EBS volumes)
+- [X] PDO-3783 Recreate the PF Threat Detection Dashboard in P1AS
+- [X] PDO-3805 Create & Deploy Health Check service in P1AS
+- [X] PDO-3842 Update cluster tools to latest version: newrelic java agent to v6.5.4
 - [X] PDO-3856 PingOne configurator skips is_myping
 - [X] PDO-3892 Fluent Bit image is now pulled from ECR
+- [X] PDO-3910 Create a logstash parsers for all ping-app non-SIEM logs
 - [X] PDO-3913 Few data views are listed twice in Kibana Discover tab
 - [X] PDO-3936 Investigate flaky PingOne integration tests
 - [X] PDO-3930 Add "pf-jwt-token-translator-1.1.1.2.jar" to artifact.json file
@@ -58,6 +65,9 @@ _Changes:_
 - [X] PDO-3946 Some of Kibana resources bootstrapping fails in rare cases
 - [X] PDO-3956 ELK: there are no log time chart and no window to choose time slot for 'pa-was-system' data view
 - [X] PDO-3959 Fix URLs not rendering due to DNS_ZONE envsubst ordering
+- [X] PDO-3968 Update logstash image to have all needed plugins
+- [X] PDO-3972 Remove stunnel
+- [X] PDO-3980 Health Check service is listing wrong envType in a CDE
 
 ### 1.13.0
 
