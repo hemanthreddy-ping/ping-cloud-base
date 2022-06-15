@@ -31,9 +31,6 @@ set_deploy_type_env_vars() {
   # MySQL database names cannot have dashes. So transform dashes into underscores.
   ENV_NAME_NO_DASHES=$(echo ${CI_COMMIT_REF_SLUG} | tr '-' '_')
 
-  # Service SSM should be available for all environments
-  export SERVICE_SSM_PATH_PREFIX="/${SELECTED_KUBE_NAME}/pcpt/service"
-
   if [[ -n ${PINGONE} ]]; then
     # Set PingOne deploy env vars
     echo "Setting env vars for PingOne deployment"
@@ -97,6 +94,9 @@ set_env_vars() {
     export AWS_PROFILE=csg
 
     export LEGACY_LOGGING=True
+
+    # Service SSM should be available for all environments
+    export SERVICE_SSM_PATH_PREFIX="/${SELECTED_KUBE_NAME}/pcpt/service"
 
   elif test -f "${ENV_VARS_FILE}"; then
     echo "Using environment variables defined in file ${ENV_VARS_FILE}"
