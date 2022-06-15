@@ -9,4 +9,5 @@ resources:
 - logging
 - metrics
 - monitoring
+- pingcloud-healthcheck
 - security
