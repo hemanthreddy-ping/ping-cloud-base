@@ -55,6 +55,7 @@ _Changes:_
 - [X] PDO-3773 Encrypt K8s StorageClass (AWS EBS volumes)
 - [X] PDO-3783 Recreate the PF Threat Detection Dashboard in P1AS
 - [X] PDO-3805 Create & Deploy Health Check service in P1AS
+- [X] PDO-3840 Update cluster tools to latest version: prometheus to v2.36.1
 - [X] PDO-3842 Update cluster tools to latest version: newrelic java agent to v6.5.4
 - [X] PDO-3856 PingOne configurator skips is_myping
 - [X] PDO-3892 Fluent Bit image is now pulled from ECR
