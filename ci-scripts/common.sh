@@ -32,6 +32,7 @@ set_deploy_type_env_vars() {
   ENV_NAME_NO_DASHES=$(echo ${CI_COMMIT_REF_SLUG} | tr '-' '_')
 
   # Service SSM should be available for all environments
+  export SERVICE_SSM_PATH_PREFIX="/${SELECTED_KUBE_NAME}/pcpt/service"
 
   if [[ -n ${PINGONE} ]]; then
     # Set PingOne deploy env vars
