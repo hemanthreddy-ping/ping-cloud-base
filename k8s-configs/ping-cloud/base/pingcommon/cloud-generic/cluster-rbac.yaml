@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: ping-cluster-serviceaccount
+  namespace: default
 
 ---
 
@@ -66,3 +67,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: ping-cluster-serviceaccount
+    namespace: default
