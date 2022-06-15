@@ -143,7 +143,8 @@
 # ORCH_API_SSM_PATH_PREFIX  | The prefix of the SSM path that contains MyPing    | /pcpt/orch-api
 #                           | state data required for the P14C/P1AS integration. |
 #                           |                                                    |
-# SERVICE_SSM_PATH_PREFIX   | The prefix of the SSM path that contains Services  | /pcpt/service
+# SERVICE_SSM_PATH_PREFIX   | The prefix of the SSM path that contains Services  |
+#                           | data for the cluster                               | /pcpt/service
 #                           |                                                    |
 # DEPLOY_FILE               | The name of the file where the final deployment    | /tmp/deploy.yaml
 #                           | spec is saved before applying it.                  |

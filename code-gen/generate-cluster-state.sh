@@ -210,7 +210,7 @@
 #                          | state data required for the P14C/P1AS integration. |
 #                          |                                                    |
 # SERVICE_SSM_PATH_PREFIX  | The prefix of the SSM path that contains service   | /pcpt/service
-#                          | state data required for the P14C/P1AS integration. |
+#                          | state data required for the cluster.               |
 #                          |                                                    |
 # NEW_RELIC_LICENSE_KEY    | The key of NewRelic APM Agent used to send data to | The string "unused".
 #                          | NewRelic account.                                  |
