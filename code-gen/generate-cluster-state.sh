@@ -376,7 +376,7 @@ add_derived_variables() {
     export DNS_ZONE="\${TENANT_DOMAIN}"
     export PRIMARY_DNS_ZONE="\${PRIMARY_TENANT_DOMAIN}"
   else
-    export DNS_ZONE="\${ENV}-\${TENANT_DOMAIN}"
+    export DNS_ZONE="\${REGION_ENV}-\${TENANT_DOMAIN}"
     export PRIMARY_DNS_ZONE="\${ENV}-\${PRIMARY_TENANT_DOMAIN}"
   fi
 
@@ -863,7 +863,7 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
     export PF_PD_BIND_PROTOCOL=ldap
     export PF_PD_BIND_USESSL=false
   else
-    export PF_PD_BIND_PORT=5678
+    export PF_PD_BIND_PORT=1636
     export PF_PD_BIND_PROTOCOL=ldaps
     export PF_PD_BIND_USESSL=true
   fi
