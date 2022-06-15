@@ -4,9 +4,12 @@ import utils
 import re as regex
 
 # Constants
-SEMANTIC_VERSION_REGEX = "([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)"
+SEMANTIC_VERSION_REGEX = "([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)(_RC[0-9]+)?"
 
 
+# This class is very similar to the script located in
+# ping-cloud-docker/ci-scripts/python/src/get_latest_release_candidate_image.py
+# with come changes/additions to account for non-RC tags
 class LatestImageManager:
     """Get the latest ECR image"""
 
@@ -48,10 +51,7 @@ class LatestImageManager:
         """
           Extract infrastructure version | beluga major version from gitlab tag name.
         """
-        if "RC" in self.orig_gitlab_name:
-            gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX + "_RC([0-9]+)", self.orig_gitlab_name)
-        else:
-            gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX, self.orig_gitlab_name)
+        gitlab_tag_name = regex.search(SEMANTIC_VERSION_REGEX, self.orig_gitlab_name)
 
         if gitlab_tag_name is None:
             raise Exception(f"Unexpected Results: Invalid Gitlab tag name - {self.orig_gitlab_name}")
@@ -94,6 +94,7 @@ class LatestImageManager:
     def get_latest_image(self):
         """
           Filter out all images that are in the same release (infrastructure_version and beluga_major_version).
+          and pcb_patch_num if RC tag
           Return the most recent image for the given product.
         """
         all_images_within_release = []
@@ -135,10 +136,10 @@ class LatestImageManager:
             raise Exception(
                 f"No image was found within {self.infrastructure_version_num}.{self.beluga_major_version_num}.{self.pcb_patch_num} release")
 
-        # Sort release candidates by highest to lowest. The highest RC is considered as the most recent.
+        # Sort candidates by highest to lowest. The highest is considered as the most recent.
         all_images_within_release.sort(key=lambda version: version["image_version_list"], reverse=True)
 
-        # Return the first item from the list. This is the latest release candidate within the release.
+        # Return the first item from the list. This is the latest candidate within the release.
         return all_images_within_release[0]["image_tag_name"]
 
 
