@@ -31,13 +31,14 @@ set_deploy_type_env_vars() {
   # MySQL database names cannot have dashes. So transform dashes into underscores.
   ENV_NAME_NO_DASHES=$(echo ${CI_COMMIT_REF_SLUG} | tr '-' '_')
 
+  # Service SSM should be available for all environments
+
   if [[ -n ${PINGONE} ]]; then
     # Set PingOne deploy env vars
     echo "Setting env vars for PingOne deployment"
     export NAMESPACE=ping-p1-${CI_COMMIT_REF_SLUG}
     export PLATFORM_EVENT_QUEUE_NAME="${SELECTED_KUBE_NAME}_v2_platform_event_queue.fifo"
     export ORCH_API_SSM_PATH_PREFIX="/${SELECTED_KUBE_NAME}/pcpt/orch-api"
-    export SERVICE_SSM_PATH_PREFIX="/${SELECTED_KUBE_NAME}/pcpt/service"
     export MYSQL_DATABASE="p1_pingcentral${ENV_NAME_NO_DASHES}"
     export BELUGA_ENV_NAME=p1-${CI_COMMIT_REF_SLUG}
     if [[ ${CI_COMMIT_REF_SLUG} != master ]]; then
@@ -49,7 +50,6 @@ set_deploy_type_env_vars() {
     export NAMESPACE=ping-cloud-${CI_COMMIT_REF_SLUG}
     export PLATFORM_EVENT_QUEUE_NAME="v2_platform_event_queue.fifo"
     export ORCH_API_SSM_PATH_PREFIX="/pcpt/orch-api"
-    export SERVICE_SSM_PATH_PREFIX="/pcpt/service"
     export MYSQL_DATABASE="pingcentral_${ENV_NAME_NO_DASHES}"
     export BELUGA_ENV_NAME=${CI_COMMIT_REF_SLUG}
     if [[ ${CI_COMMIT_REF_SLUG} != master ]]; then
