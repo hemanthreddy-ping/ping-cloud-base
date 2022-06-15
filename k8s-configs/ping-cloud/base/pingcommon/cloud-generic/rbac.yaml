@@ -17,7 +17,6 @@ rules:
     - "pods/log"
     - "secrets"
     - "configmaps"
-    - "namespaces"
     verbs:
     - get
     - list
