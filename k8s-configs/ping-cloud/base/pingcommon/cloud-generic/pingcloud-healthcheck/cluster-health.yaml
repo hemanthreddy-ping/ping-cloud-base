@@ -4,6 +4,7 @@ metadata:
   name: healthcheck-cluster-health
 spec:
   schedule: "* * * * *"
+  startingDeadlineSeconds: 90
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
   concurrencyPolicy: Forbid
