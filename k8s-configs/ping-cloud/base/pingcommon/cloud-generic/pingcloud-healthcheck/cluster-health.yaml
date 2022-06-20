@@ -6,8 +6,10 @@ spec:
   schedule: "* * * * *"
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      backoffLimit: 0
       template:
         spec:
           serviceAccountName: cluster-healthcheck-serviceaccount
