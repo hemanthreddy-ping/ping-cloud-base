@@ -17,7 +17,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: healthcheck-cluster-health
-            image: 705370621539.dkr.ecr.us-west-2.amazonaws.com/pingcloud-services/robot-framework:v1.3.0-pdo-3919-cluster-health-2
+            image: 705370621539.dkr.ecr.us-west-2.amazonaws.com/pingcloud-services/robot-framework:v1.3.0-update-ss-tests
             imagePullPolicy: Always
             securityContext:
               runAsGroup: 9999
