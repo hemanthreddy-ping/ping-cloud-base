@@ -38,7 +38,7 @@ class TestHealthcheck(unittest.TestCase):
             (
                 pod.metadata.name
                 for pod in pods.items
-                if pod.metadata.name.startswith("pingcloud-healthcheck")
+                if pod.metadata.name.startswith("pingone-configurator")
             ),
             False,
         )
