@@ -14,9 +14,6 @@ class TestPingOneConfigurator(unittest.TestCase):
         cls.core_client = client.CoreV1Api()
         cls.network_client = client.NetworkingV1Api()
 
-    def setUp(self):
-        self.endpoint = self.get_pingoneconfigurator_endpoint()
-
     def test_pingoneconfigurator_pod_exists(self):
         pods = self.core_client.list_pod_for_all_namespaces(watch=False)
         res = next(
