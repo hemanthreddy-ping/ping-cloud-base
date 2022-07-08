@@ -1,5 +1,7 @@
+import json
 import unittest
 
+import requests
 from kubernetes import client, config
 
 
