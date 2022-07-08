@@ -1,7 +1,5 @@
-import json
 import unittest
 
-import requests
 from kubernetes import client, config
 
 
@@ -11,8 +9,7 @@ class TestPingOneConfigurator(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         config.load_kube_config()
-        cls.core_client = client.CoreV1Api()
-        cls.network_client = client.NetworkingV1Api()
+        cls.core_client = client.CoreV1Api()       
 
     def test_pingoneconfigurator_pod_exists(self):
         pods = self.core_client.list_pod_for_all_namespaces(watch=False)
