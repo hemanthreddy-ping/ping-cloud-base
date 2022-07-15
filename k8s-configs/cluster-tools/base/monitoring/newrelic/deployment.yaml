@@ -63,7 +63,6 @@ spec:
         - --collectors=volumeattachments
         - --telemetry-port=8081
         imagePullPolicy: IfNotPresent
-        # FIXME: PDO-3533
         image: "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v1.9.8"
         securityContext:
           runAsGroup: 65534
@@ -126,7 +125,6 @@ spec:
       hostNetwork: false
       containers:
       - name: nri-metadata-injection
-        # FIXME: PDO-3533
         image: "newrelic/k8s-metadata-injection:1.7.0"
         imagePullPolicy: IfNotPresent
         securityContext:
@@ -212,7 +210,6 @@ spec:
               value: "newrelic-license-key"
       containers:
       - name: nri-prometheus
-        # FIXME: PDO-3533
         image: "newrelic/nri-prometheus:2.16.1"
         imagePullPolicy: IfNotPresent
         securityContext:
@@ -295,7 +292,6 @@ spec:
               value: "newrelic-license-key"
       containers:
         - name: kube-events
-          # FIXME: PDO-3533
           image: newrelic/nri-kube-events:1.8.0
           imagePullPolicy: IfNotPresent
           securityContext:
@@ -310,7 +306,6 @@ spec:
             - name: config-volume
               mountPath: /app/config
         - name: forwarder
-          # FIXME: PDO-3533
           image: newrelic/k8s-events-forwarder:1.22.0
           imagePullPolicy: IfNotPresent
           securityContext:
@@ -390,7 +385,6 @@ metadata:
     app.kubernetes.io/name: newrelic-infrastructure
     app.kubernetes.io/version: 3.2.0
     helm.sh/chart: newrelic-infrastructure-3.5.3
-    # mode: privileged
   name: nri-bundle-nrk8s-ksm
 spec:
   strategy: 
@@ -406,7 +400,6 @@ spec:
         nri-bundle.version: 4.5.8
         app.kubernetes.io/instance: nri-bundle
         app.kubernetes.io/name: newrelic-infrastructure
-        # mode: privileged
         app.kubernetes.io/component: ksm
       annotations: {}
     spec:

@@ -11,7 +11,6 @@ metadata:
     app.kubernetes.io/name: newrelic-infrastructure
     app.kubernetes.io/version: 3.2.0
     helm.sh/chart: newrelic-infrastructure-3.5.3
-    # mode: privileged
   name: nri-bundle-nrk8s-controlplane
 spec:
   updateStrategy: 
@@ -29,7 +28,6 @@ spec:
         nri-bundle.version: 4.5.8
         app.kubernetes.io/instance: nri-bundle
         app.kubernetes.io/name: newrelic-infrastructure
-        # mode: privileged
         app.kubernetes.io/component: controlplane
       annotations: {}
     spec:
@@ -190,7 +188,6 @@ metadata:
     app.kubernetes.io/name: newrelic-infrastructure
     app.kubernetes.io/version: 3.2.0
     helm.sh/chart: newrelic-infrastructure-3.5.3
-    # mode: privileged
   name: nri-bundle-nrk8s-kubelet
 spec:
   updateStrategy: 
@@ -208,7 +205,6 @@ spec:
         nri-bundle.version: 4.5.8
         app.kubernetes.io/instance: nri-bundle
         app.kubernetes.io/name: newrelic-infrastructure
-        # mode: privileged
         app.kubernetes.io/component: kubelet
       annotations: {}
     spec:
@@ -273,7 +269,6 @@ spec:
               cpu: 100m
               memory: 150M
         - name: agent
-          # FIXME: PDO-3533
           image: "newrelic/infrastructure-bundle:2.8.15"
           args: [ "newrelic-infra" ]
           imagePullPolicy: IfNotPresent
