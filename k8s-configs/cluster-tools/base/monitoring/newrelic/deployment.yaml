@@ -31,6 +31,9 @@ spec:
         fsGroup: 65534
         runAsGroup: 65534
         runAsUser: 65534
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
       containers:
       - name: kube-state-metrics
         args:
@@ -63,6 +66,7 @@ spec:
         - --collectors=volumeattachments
         - --telemetry-port=8081
         imagePullPolicy: IfNotPresent
+        # FIXME: PDO-3533
         image: "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v1.9.8"
         ports:
         - containerPort: 8080
@@ -116,9 +120,13 @@ spec:
         fsGroup: 1001
         runAsUser: 1001
         runAsGroup: 1001
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
       hostNetwork: false
       containers:
       - name: nri-metadata-injection
+        # FIXME: PDO-3533
         image: "newrelic/k8s-metadata-injection:1.7.0"
         imagePullPolicy: IfNotPresent
         env:
@@ -198,8 +206,16 @@ spec:
               value: "newrelic-license-key"
       containers:
       - name: nri-prometheus
+        # FIXME: PDO-3533
         image: "newrelic/nri-prometheus:2.16.1"
-        imagePullPolicy: 
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: false
+          runAsGroup: 65534
+          runAsNonRoot: true
+          runAsUser: 65534
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
         args:
           - "--configfile=/etc/nri-prometheus/config.yaml"
         ports:
@@ -273,10 +289,14 @@ spec:
               value: "newrelic-license-key"
       containers:
         - name: kube-events
+          # FIXME: PDO-3533
           image: newrelic/nri-kube-events:1.8.0
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: false
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
           args: ["-config", "/app/config/config.yaml", "-loglevel", "debug"]
@@ -284,10 +304,14 @@ spec:
             - name: config-volume
               mountPath: /app/config
         - name: forwarder
+          # FIXME: PDO-3533
           image: newrelic/k8s-events-forwarder:1.22.0
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: false
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
           ports:
