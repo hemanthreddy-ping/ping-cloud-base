@@ -130,7 +130,6 @@ spec:
         image: "newrelic/k8s-metadata-injection:1.7.0"
         imagePullPolicy: IfNotPresent
         securityContext:
-          fsGroup: 1001
           runAsUser: 1001
           runAsGroup: 1001
           runAsNonRoot: true
