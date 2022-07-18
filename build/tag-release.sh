@@ -54,6 +54,15 @@ replace_and_commit() {
     "metadata"
     "healthcheck"
     "ansible-beluga"
+    "pingcloud-monitoring/logging-bootstrap"
+    "pingcloud-monitoring/logstash"
+    "pingcloud-monitoring/grafana"
+    "pingcloud-monitoring/enrichment-bootstrap"
+    "pingcloud-monitoring/prometheus-json-exporter"
+    "pingcloud-monitoring/newrelic-tags-exporter"
+    "pingcloud-services/robot-framework"
+    "pingcloud-services/sigsci-nginx-ingress-controller"
+    "pingcloud-services/sigsci-agent"
   )
 
   for image in ${image_map[@]}; do
