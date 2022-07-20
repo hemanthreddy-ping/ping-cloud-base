@@ -5,16 +5,20 @@
 - Augment ArgoCD's application name with customer name
 - Add fix to application name for ArgoCD
 - Fix grafana PD topology successful SSOs
+- Updated cluster tool sealed-secrets-controller from v0.17.3 to v0.18.0
 
 _Changes:_
 
 - [X] PDO-2635 Augment ArgoCD's application name with customer name
+- [X] PDO-3271 Updated argocd to v2.4.6
+- [X] PDO-3273 Update cluster tool to latest version: sealed-secrets-controller v.0.18.0
 - [X] PDO-3575 Cluster tool: force pingcloud-monitoring/newrelic-tags-exporter initContainer to run with allowPrivilegeEscalation: false
 - [X] PDO-3940 Add timeouts for screen updates in PingOne integration tests
 - [X] PDO-3988 Grafana Successful SSOs Pingfederate Topology dashboard displaying wrong data
 - [X] PDO-4036 Fix SigSci to exit properly when terminated
 - [X] PDO-3524 Create PingOne-Configurator test for CI/CD
 - [X] PDO-3918 Move chrome install from run-integration-tests.sh to k8s-deploy-tools image
+- [X] PDO-4060 Update versioning for cluster tools in PCB
 
 ### 1.14.0
 - Update cluster-tool external-dns from version v0.08.0 to version v.0.11.0
