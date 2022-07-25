@@ -48,6 +48,9 @@ class TestHealthcheck(unittest.TestCase):
         res = requests.get(self.endpoint, verify=False)
         self.assertEqual(200, res.status_code)
 
+    def test_cluster_health_cronjob_exists(self):
+        pass
+
 
 if __name__ == "__main__":
     unittest.main()
