@@ -6,6 +6,7 @@
 - Add fix to application name for ArgoCD
 - Fix grafana PD topology successful SSOs
 - Updated cluster tool sealed-secrets-controller from v0.17.3 to v0.18.0
+- Use generic bootstrap app for p14c and logging
 
 _Changes:_
 
@@ -18,6 +19,7 @@ _Changes:_
 - [X] PDO-4036 Fix SigSci to exit properly when terminated
 - [X] PDO-3524 Create PingOne-Configurator test for CI/CD
 - [X] PDO-3918 Move chrome install from run-integration-tests.sh to k8s-deploy-tools image
+- [X] PDO-4002 Unified bootstrap application
 - [X] PDO-4060 Update versioning for cluster tools in PCB
 
 ### 1.14.0
