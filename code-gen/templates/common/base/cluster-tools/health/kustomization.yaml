@@ -1,0 +1,29 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+  - ${K8S_GIT_URL}/k8s-configs/cluster-tools/base/pod-reaper?ref=${K8S_GIT_BRANCH}
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: pingcloud-healthcheck-environment-variables
+  behavior: merge
+  envs:
+  - ../../env_vars
+
+patchesJson6902:
+# pingcloud-healthcheck ingress
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: healthcheck-ingress
+  patch: |
+    - op: replace
+      path: /spec/tls/0/hosts/0
+      value: healthcheck.${DNS_ZONE}
+    - op: replace
+      path: /spec/rules/0/host
+      value: healthcheck.${DNS_ZONE}

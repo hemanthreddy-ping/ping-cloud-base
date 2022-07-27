@@ -11,5 +11,8 @@ configMapGenerator:
 
 resources:
 - cluster-health.yaml
+- deployment.yaml
+- ingress.yaml
 - namespace.yaml
+- service.yaml
 - serviceaccount.yaml

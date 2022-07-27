@@ -396,3 +396,18 @@ patchesJson6902:
     - op: replace
       path: /spec/template/metadata/annotations/CLUSTER_NAME
       value: ${NEW_RELIC_ENVIRONMENT_NAME}
+
+
+# pingcloud-healthcheck ingress
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: healthcheck-ingress
+  patch: |-
+    - op: replace
+      path: /spec/tls/0/hosts/0
+      value: healthcheck${ENVIRONMENT}.${TENANT_DOMAIN}
+    - op: replace
+      path: /spec/rules/0/host
+      value: healthcheck${ENVIRONMENT}.${TENANT_DOMAIN}
