@@ -24,6 +24,7 @@ SKIP_TESTS="${SKIP_TESTS:-pingdirectory/03-backup-restore.sh \
   pingaccess/08-artifact-test.sh \
   pingdelegator/01-admin-user-login.sh \
   pingaccess-was/05-test-cloudwatch-logs.sh \
+  monitoring/03-nri-kubernetes.sh \
   chaos/01-delete-pa-admin-pod.sh }"
 
 # environment variables that are determined based on deployment type (traditional or PingOne)

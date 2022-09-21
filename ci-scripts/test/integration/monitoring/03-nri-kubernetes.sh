@@ -8,17 +8,17 @@ if skipTest "${0}"; then
 fi
 
 get_pods_state() {
-    pods=$(kubectl get pods -l $1 -n $2  -o json | jq -r '.items[] | .metadata.name')
-    if [ -n "$pods" ]; then
-        for pod in $pods
-        do
-            phase=$(kubectl get pod $pod -n $2 -o json | jq -r '.status.phase')
-            [[ "$phase" != "Running" ]] && return 1;
-        done
-        return 0
-    else
-        return 1
-    fi
+  pods=$(kubectl get pods -l $1 -n $2  -o json | jq -r '.items[] | .metadata.name')
+  if [ -n "$pods" ]; then
+      for pod in $pods
+      do
+          phase=$(kubectl get pod $pod -n $2 -o json | jq -r '.status.phase')
+          [[ "$phase" != "Running" ]] && return 1;
+      done
+      return 0
+  else
+      return 1
+  fi
 }
 
 testNriBundleNrk8sKubeletIsRunning() {
