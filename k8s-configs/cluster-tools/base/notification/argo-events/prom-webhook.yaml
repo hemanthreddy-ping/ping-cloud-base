@@ -22,7 +22,7 @@ spec:
   template:
     serviceAccountName: argo-events-sa
   dependencies:
-    - name: test-dep
+    - name: trigger-slack
       eventSourceName: prom-webhook
       eventName: prom-webhook
   triggers:
@@ -39,8 +39,8 @@ spec:
             dependencyName: trigger-slack
             dataTemplate: |-
               *Status*: {{ .Input.body.alerts.0.status }}
-              *Description*: {{ .Input.body.alerts.0.annotations.description}}
-              *Summary*: {{ .Input.body.alerts.0.annotations.summary}}
+              *Description*: {{ .Input.body.alerts.0.annotations.description }}
+              *Summary*: {{ .Input.body.alerts.0.annotations.summary }}
           dest: slack.message
 
 ---
