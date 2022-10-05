@@ -41,6 +41,7 @@ spec:
               *Status*: {{ (index .Input.body.alerts 0).status }}
               *Description*: {{ (index .Input.body.alerts 0).annotations.description }}
               *Summary*: {{ (index .Input.body.alerts 0).annotations.summary }}
+              *Cluster*: {{ (index .Input.body.alerts 0).labels }}
           dest: slack.message
 
 ---
