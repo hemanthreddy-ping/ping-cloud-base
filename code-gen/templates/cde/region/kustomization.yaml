@@ -196,6 +196,11 @@ configMapGenerator:
   envs:
     - logging/env_vars
 
+- name: prometheus-environment-variables
+  behavior: merge
+  envs:
+    - env_vars
+
 patchesStrategicMerge:
 
 ### PS/GSO customizations to OOTB resources should only go into this file. Otherwise, CSR auto-updates will break. ###

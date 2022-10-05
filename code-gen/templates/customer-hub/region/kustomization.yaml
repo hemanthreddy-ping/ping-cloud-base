@@ -70,3 +70,8 @@ configMapGenerator:
   envs:
     - ../base/env_vars
     - env_vars
+
+- name: prometheus-environment-variables
+  behavior: merge
+  envs:
+    - env_vars
