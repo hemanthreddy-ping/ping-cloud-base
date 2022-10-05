@@ -25,6 +25,8 @@ spec:
     - name: trigger-slack
       eventSourceName: prom-webhook
       eventName: prom-webhook
+      transform:
+        jq: 'if (.body.alerts.0.status == "firing") then .body.emoji = ":exclamation:" else .body.emoji = ":white_check_mark: " end'
   triggers:
     - template:
         name: trigger-slack
@@ -38,7 +40,7 @@ spec:
         - src:
             dependencyName: trigger-slack
             dataTemplate: |-
-              *Status*: {{ (index .Input.body.alerts 0).status }}
+              *Status*: {{ .Input.body.emoji }}{{ (index .Input.body.alerts 0).status }}
               *Description*: {{ (index .Input.body.alerts 0).annotations.description }}
               *Summary*: {{ (index .Input.body.alerts 0).annotations.summary }}
               *Cluster*: {{ (index .Input.body.alerts 0).labels.k8s_cluster_name }}
