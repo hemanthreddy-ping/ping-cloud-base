@@ -12,6 +12,7 @@ spec:
       port: "13000"
       endpoint: /notification
       method: POST
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
@@ -27,12 +28,12 @@ spec:
   triggers:
     - template:
         name: trigger-slack
-          slack:
-            channel: general
-            message: this is default message from argo-events
-            slackToken:
-              key: token
-              name: test_secret
+        slack:
+          channel: general
+          message: this is default message from argo-events
+          slackToken:
+            key: token
+            name: test_secret
       parameters:
         - src:
             dependencyName: trigger-slack
@@ -41,6 +42,7 @@ spec:
               *Description*: {{ .Input.body.alerts.0.annotations.description}}
               *Summary*: {{ .Input.body.alerts.0.annotations.summary}}
           dest: slack.message
+
 ---
 kind: Secret
 apiVersion: v1
