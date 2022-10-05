@@ -33,7 +33,7 @@ spec:
           message: this is default message from argo-events
           slackToken:
             key: token
-            name: test_secret
+            name: test-secret
       parameters:
         - src:
             dependencyName: trigger-slack
@@ -47,6 +47,6 @@ spec:
 kind: Secret
 apiVersion: v1
 metadata:
-  name: test_secret
+  name: test-secret
 data:
   token: eG94Yi00MTc0NjcxNTM5NzgwLTQxNzAxNjMyMjE3OTgtZHlEczBOV2ZXYlhtUk8wZndkdTdVQXVnCg==
