@@ -36,10 +36,7 @@ spec:
           parameters:
             - src:
                 dependencyName: trigger-slack
-                dataTemplate: |-
-                  *Status*: {{ .Input.body.alerts.0.status }}
-                  *Description*: {{ .Input.body.alerts.0.annotations.description}}
-                  *Summary*: {{ .Input.body.alerts.0.annotations.summary}}
+                dataTemplate: "*Status*: {{ .Input.body.alerts.0.status }}\n*Description*: {{ .Input.body.alerts.0.annotations.description}}\n*Summary*: {{ .Input.body.alerts.0.annotations.summary}}"
               dest: slack.message
 ---
 kind: Secret
