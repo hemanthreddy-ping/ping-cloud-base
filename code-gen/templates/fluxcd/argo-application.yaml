@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: "ping-cloud-${CLUSTER_STATE_REPO_BRANCH}-${TENANT_NAME}-${REGION_NICK_NAME}"
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: ${SLACK_CHANNEL}
 spec:
   ignoreDifferences:
   - group: batch
