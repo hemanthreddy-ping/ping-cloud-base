@@ -8,6 +8,13 @@ spec:
   externalName: prometheus-central.${PRIMARY_DNS_ZONE}
   $patch: replace
 ---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prometheus
+  namespace: prometheus
+$patch: delete
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,6 +26,13 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-config
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
   namespace: prometheus
 $patch: delete
 ---
@@ -34,4 +48,19 @@ apiVersion: v1
 metadata:
   name: grafana
   namespace: prometheus
-$patch: detele
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-providers
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ping-dashboards
+  namespace: prometheus
+$patch: delete
+---
