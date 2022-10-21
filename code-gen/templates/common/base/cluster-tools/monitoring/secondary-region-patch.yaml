@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus
+  namespace: prometheus
+spec:
+  type: ExternalName
+  externalName: prometheus-central.${PRIMARY_DNS_ZONE}
+  $patch: replace
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: prometheus
+$patch: delete
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: grafana
+  namespace: prometheus
+$patch: detele
