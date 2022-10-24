@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.17.0.0
+
+- Remove logstash tolerations
+
+_Changes:_
+
+- [X] PDO-4432 Logstash has broken tolerations
+
 ### 1.16.0.0
 
 - "12-delegated-admin.dsconfig" file replaced with "00-reset-delegated-admin.dsconfig" and "01-add-delegated-admin.dsconfig"
