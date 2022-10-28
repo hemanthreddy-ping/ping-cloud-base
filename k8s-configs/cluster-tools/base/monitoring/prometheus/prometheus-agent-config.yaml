@@ -21,9 +21,10 @@ data:
     remote_write:
     - url: 'http://prometheus:9090/api/v1/write'
 
-    tsdb:
-      out_of_order_time_window: 2h
-    
+    storage:
+      tsdb:
+        out_of_order_time_window: 2h
+
     scrape_configs:
     # Monitor prometheus itself
     - job_name: 'prometheus'
