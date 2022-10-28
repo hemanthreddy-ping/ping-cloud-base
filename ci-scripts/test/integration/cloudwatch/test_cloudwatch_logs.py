@@ -3,9 +3,6 @@ import os
 import boto3
 import json
 
-from pprint import pprint
-
-from kubernetes.client.rest import ApiException
 from kubernetes import client, config
 
 aws_region = os.getenv("AWS_REGION", "us-west-2")
@@ -14,7 +11,7 @@ aws_client = boto3.client("logs", region_name=aws_region)
 config.load_kube_config()
 k8s_client = client.CoreV1Api()
 
-pod_name = "es-cluster-hot-0"
+pod_name = "es-cluster-hot-10"
 pod_namespace = "elastic-stack-logging"
 container_name = "elasticsearch"
 k8s_cluster_name = os.getenv("TENANT_NAME")
@@ -74,5 +71,3 @@ class TestCloudWatchLogs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    # get_latest_cw_logs()
-    # get_latest_pod_logs()
