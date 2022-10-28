@@ -20,6 +20,8 @@ data:
     rule_files:
       - /etc/prometheus/alert-rules.d/*.yml
 
+    tsdb:
+      out_of_order_time_window: 2h
     scrape_configs:
     # Monitor prometheus itself
     - job_name: 'prometheus'
