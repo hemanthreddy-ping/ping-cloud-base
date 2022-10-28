@@ -11,12 +11,13 @@ aws_client = boto3.client("logs", region_name=aws_region)
 config.load_kube_config()
 k8s_client = client.CoreV1Api()
 
+# Change the pod_name, pod_namespace, and container_name to use this test with another application.
 pod_name = "es-cluster-hot-0"
 pod_namespace = "elastic-stack-logging"
 container_name = "elasticsearch"
 k8s_cluster_name = os.getenv("TENANT_NAME")
 log_group_name = f"/aws/containerinsights/{k8s_cluster_name}/application"
-log_stream_name = f"es-cluster-hot-1_{pod_namespace}_{container_name}.cw_out"
+log_stream_name = f"{pod_name}_{pod_namespace}_{container_name}.cw_out"
 
 
 def get_latest_cw_logs():
