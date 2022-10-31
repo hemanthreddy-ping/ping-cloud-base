@@ -27,7 +27,7 @@ def get_latest_cw_logs():
     response = aws_client.get_log_events(
         logGroupName=log_group_name,
         logStreamName=log_stream_name,
-        limit=log_lines,
+        limit=int(log_lines),
         startFromHead=False,
     )
 
@@ -39,7 +39,7 @@ def get_latest_cw_logs():
 
 def get_latest_pod_logs():
     pod_logs = k8s_client.read_namespaced_pod_log(
-        name=pod_name, container=container_name, namespace=pod_namespace, tail_lines=log_lines
+        name=pod_name, container=container_name, namespace=pod_namespace, tail_lines=int(log_lines)
     )
     pod_logs = pod_logs.splitlines()
     return pod_logs
