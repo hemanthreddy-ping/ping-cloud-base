@@ -152,7 +152,7 @@ PING_IDENTITY_DEVOPS_KEY=${PING_IDENTITY_DEVOPS_KEY}
 # Ping application image tags
 ############################################################
 PINGACCESS_IMAGE_TAG=v1.17-release-branch-latest
-PINGACCESS_WAS_IMAGE_TAG=v1.17-release-branch-latest
+PINGACCESS_WAS_IMAGE_TAG=PDO-4312-pa-tests
 PINGFEDERATE_IMAGE_TAG=v1.17-release-branch-latest
 PINGDIRECTORY_IMAGE_TAG=v1.17-release-branch-latest
 PINGDELEGATOR_IMAGE_TAG=v1.17-release-branch-latest
