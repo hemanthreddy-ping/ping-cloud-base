@@ -16,13 +16,16 @@ data:
       scrape_timeout: 5s
       # How frequently to evaluate rules.
       evaluation_interval: 5s
+      external_labels:
+        slack_channel: ${PROM_SLACK_CHANNEL}
+        notifications_enabled: ${PROM_NOTIFICATION_ENABLED}
 
     rule_files:
       - /etc/prometheus/alert-rules.d/*.yml
 
     storage:
       tsdb:
-        out_of_order_time_window: 2h
+        out_of_order_time_window: 1d
     scrape_configs:
     # Monitor prometheus itself
     - job_name: 'prometheus'

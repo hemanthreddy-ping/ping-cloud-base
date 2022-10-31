@@ -64,3 +64,24 @@ metadata:
   namespace: prometheus
 $patch: delete
 ---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+  namespace: prometheus
+$patch: delete
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+  namespace: prometheus
+$patch: delete
+---

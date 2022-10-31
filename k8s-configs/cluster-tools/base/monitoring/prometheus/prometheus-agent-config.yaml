@@ -23,7 +23,7 @@ data:
 
     storage:
       tsdb:
-        out_of_order_time_window: 2h
+        out_of_order_time_window: 1d
 
     scrape_configs:
     # Monitor prometheus itself

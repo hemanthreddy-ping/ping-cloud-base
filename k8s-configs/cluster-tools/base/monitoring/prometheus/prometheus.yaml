@@ -18,19 +18,22 @@ spec:
       serviceAccountName: prometheus
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.39.1
+        image: public.ecr.aws/r2h3l6e4/prom/prometheus:v2.39.1
         args:
           - "--config.file=/etc/prometheus/prometheus.yml"
           - "--storage.tsdb.retention.time=$(PROMETHEUS_RETENTION_TIME)"
           - "--web.enable-remote-write-receiver"
-          - "--web.enable-lifecycle"
           - "--enable-feature=memory-snapshot-on-shutdown"
+          - "--enable-feature=expand-external-labels"
         env:
           - name: PROMETHEUS_RETENTION_TIME
             valueFrom:
               configMapKeyRef:
                 key: PROMETHEUS_RETENTION_TIME
                 name: prometheus-environment-variables
+        envFrom:
+          - configMapRef:
+              name: prometheus-environment-variables
         volumeMounts:
           - name: prometheus-config-volume
             mountPath: /etc/prometheus/
