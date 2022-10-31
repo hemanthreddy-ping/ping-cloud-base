@@ -4,6 +4,7 @@
 
 - Remove logstash tolerations
 - Prometheus configured to take metrics from second region
+- Prometheus upgraded to 2.39.1
 
 _Changes:_
 
