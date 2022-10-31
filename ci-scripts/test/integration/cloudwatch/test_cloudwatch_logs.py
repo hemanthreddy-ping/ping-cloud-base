@@ -11,6 +11,8 @@ aws_client = boto3.client("logs", region_name=aws_region)
 config.load_kube_config()
 k8s_client = client.CoreV1Api()
 
+log_lines = os.getenv('LOG_LINES_TO_TEST', 10)
+
 # Change the pod_name, pod_namespace, and container_name to use this test with another application.
 pod_name = "es-cluster-hot-0"
 pod_namespace = "elastic-stack-logging"
@@ -25,7 +27,7 @@ def get_latest_cw_logs():
     response = aws_client.get_log_events(
         logGroupName=log_group_name,
         logStreamName=log_stream_name,
-        limit=5,
+        limit=log_lines,
         startFromHead=False,
     )
 
@@ -37,7 +39,7 @@ def get_latest_cw_logs():
 
 def get_latest_pod_logs():
     pod_logs = k8s_client.read_namespaced_pod_log(
-        name=pod_name, container=container_name, namespace=pod_namespace, tail_lines=5
+        name=pod_name, container=container_name, namespace=pod_namespace, tail_lines=log_lines
     )
     pod_logs = pod_logs.splitlines()
     return pod_logs
