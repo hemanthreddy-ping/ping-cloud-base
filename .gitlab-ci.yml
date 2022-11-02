@@ -113,7 +113,6 @@ p1-pa-was-integration-tests:
   - common
   - monitoring
   - health
-  - cloudwatch
 
 ################################################
 # All integration tests defined to run on the  #
