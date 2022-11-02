@@ -3,6 +3,7 @@ import os
 import boto3
 import json
 
+from pprint import pprint
 from kubernetes import client, config
 
 aws_region = os.getenv("AWS_REGION", "us-west-2")
@@ -46,6 +47,14 @@ def get_latest_pod_logs():
 
 
 class TestCloudWatchLogs(unittest.TestCase):
+    def debug(self):
+        pprint(pod_name)
+        pprint(pod_namespace)
+        pprint(container_name)
+        pprint(k8s_cluster_name)
+        pprint(log_group_name)
+        pprint(log_stream_name)
+
     def test_cloudwatch_log_group_exists(self):
         response = aws_client.describe_log_groups(logGroupNamePrefix=log_group_name)
 
@@ -59,6 +68,7 @@ class TestCloudWatchLogs(unittest.TestCase):
         self.assertNotEqual(response["logStreams"], [], "Required log stream not found")
 
     def test_cloudwatch_logs_exists(self):
+        self.debug()
         cw_logs = get_latest_cw_logs()
         self.assertNotEqual(len(cw_logs), 0, "No CW logs found")
 
