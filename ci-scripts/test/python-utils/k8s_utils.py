@@ -1,7 +1,5 @@
 import json
 import unittest
-import os
-import boto3
 
 from datetime import datetime
 
@@ -19,17 +17,6 @@ class K8sUtils(unittest.TestCase):
     core_client = None
     network_client = None
     endpoint = None
-
-    aws_region = os.getenv("AWS_REGION", "us-west-2")
-    aws_client = boto3.client("logs", region_name=aws_region)
-
-    pod_name = None
-    pod_namespace = None
-    container_name = None
-    k8s_cluster_name = None
-    log_group_name = None
-    log_stream_name = None
-    log_lines = None
 
     @classmethod
     def setUpClass(cls):
@@ -92,23 +79,9 @@ class K8sUtils(unittest.TestCase):
                 watch.stop()
                 return
 
-    def get_latest_cw_logs(self):
-        cw_logs = []
-        response = self.aws_client.get_log_events(
-            logGroupName=self.log_group_name,
-            logStreamName=self.log_stream_name,
-            limit=int(self.log_lines),
-            startFromHead=False,
-        )
-
-        for event in response["events"]:
-            cw_logs.append(json.loads(event["message"])["log"].replace("\n", ""))
-
-        return cw_logs
-
-    def get_latest_pod_logs(self):
+    def get_latest_pod_logs(self, pod_name: str, container_name: str, pod_namespace: str, log_lines: int):
         pod_logs = self.core_client.read_namespaced_pod_log(
-            name=self.pod_name, container=self.container_name, namespace=self.pod_namespace, tail_lines=int(self.log_lines)
+            name=pod_name, container=container_name, namespace=pod_namespace, tail_lines=int(log_lines)
         )
         pod_logs = pod_logs.splitlines()
         return pod_logs
