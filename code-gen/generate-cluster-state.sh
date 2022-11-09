@@ -356,7 +356,9 @@ ${NOTIFICATION_ENDPOINT}
 ${PF_PROVISIONING_ENABLED}
 ${RADIUS_PROXY_ENABLED}
 ${IMAGE_TAG_PREFIX}
-${ARGOCD_SLACK_TOKEN_BASE64}'
+${ARGOCD_SLACK_TOKEN_BASE64}
+${SLACK_CHANNEL}
+${PROM_SLACK_CHANNEL}'
 
 # Variables to replace within the generated cluster state code
 REPO_VARS="${REPO_VARS:-${DEFAULT_VARS}}"
@@ -865,6 +867,8 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
   export LETS_ENCRYPT_SERVER="${LETS_ENCRYPT_SERVER}"
 
   export USER_BASE_DN="${USER_BASE_DN:-dc=example,dc=com}"
+  export SLACK_CHANNEL="${SLACK_CHANNEL:-p1as-application-oncall}"
+  export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-p1as-application-oncall}"
 
   # Set PF variables based on ENV
   if echo "${LETS_ENCRYPT_SERVER}" | grep -q 'staging'; then
@@ -945,6 +949,8 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
   echo "KUSTOMIZE_BASE: ${KUSTOMIZE_BASE}"
   echo "LETS_ENCRYPT_SERVER: ${LETS_ENCRYPT_SERVER}"
   echo "USER_BASE_DN: ${USER_BASE_DN}"
+  echo "SLACK_CHANNEL: ${SLACK_CHANNEL}"
+  echo "PROM_SLACK_CHANNEL: ${PROM_SLACK_CHANNEL}"
   echo "CLUSTER_NAME: ${CLUSTER_NAME}"
   echo "PING_CLOUD_NAMESPACE: ${PING_CLOUD_NAMESPACE}"
   echo "DNS_ZONE: ${DNS_ZONE}"
