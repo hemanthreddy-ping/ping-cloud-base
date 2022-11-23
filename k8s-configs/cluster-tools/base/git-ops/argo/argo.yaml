@@ -9731,7 +9731,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         name: argocd-applicationset-controller
         ports:
@@ -9746,6 +9746,8 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
@@ -9828,7 +9830,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /shared/argocd-dex
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         name: copyutil
         securityContext:
@@ -9838,6 +9840,8 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /shared
           name: static-files
@@ -9868,7 +9872,7 @@ spec:
       containers:
       - command:
         - argocd-notifications
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
@@ -9954,7 +9958,6 @@ spec:
             - all
       securityContext:
         runAsNonRoot: true
-        runAsUser: 999
       serviceAccountName: argocd-redis
 ---
 apiVersion: apps/v1
@@ -9997,7 +10000,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /var/run/argocd/argocd-cmp-server
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         name: copyutil
         securityContext:
           allowPrivilegeEscalation: false
@@ -10006,6 +10009,8 @@ spec:
             - all
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /var/run/argocd
           name: var-files
@@ -10123,7 +10128,7 @@ spec:
           value: /helm-working-dir
         - name: HELM_DATA_HOME
           value: /helm-working-dir
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -10149,6 +10154,8 @@ spec:
             - all
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
@@ -10421,7 +10428,7 @@ spec:
               key: server.http.cookie.maxnumber
               name: argocd-cmd-params-cm
               optional: true
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -10446,6 +10453,8 @@ spec:
             - all
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
@@ -10625,7 +10634,7 @@ spec:
               key: controller.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.4.6-nonroot
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -10649,6 +10658,8 @@ spec:
             - all
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsGroup: 9999
+          runAsUser: 9031
         volumeMounts:
         - mountPath: /app/config/controller/tls
           name: argocd-repo-server-tls
