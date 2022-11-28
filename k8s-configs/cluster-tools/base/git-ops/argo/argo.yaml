@@ -9958,6 +9958,8 @@ spec:
             - all
       securityContext:
         runAsNonRoot: true
+        runAsGroup: 9999
+        runAsUser: 9031
       serviceAccountName: argocd-redis
 ---
 apiVersion: apps/v1
