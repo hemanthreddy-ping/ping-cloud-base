@@ -1,0 +1,10 @@
+{
+    "us-west-2": {
+      "hostname": "pingdirectory.ping-cloud-us-west-2.p1as.ping-demo.com",
+      "replicas": 2
+    },
+    "us-east-2": {
+      "hostname": "pingdirectory.ping-cloud-us-east-2.p1as.ping-demo.com",
+      "replicas": 2
+    }
+  }
