@@ -18,3 +18,4 @@ resources:
 - serviceaccount.yaml
 - httpbin.yaml
 - httpbin-pa-was.yaml
+- secrets.yaml
