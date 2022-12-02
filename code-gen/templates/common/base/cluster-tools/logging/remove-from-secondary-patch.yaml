@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: elasticsearch
   namespace: elastic-stack-logging
+  annotations:
+    $patch: delete
 spec:
   type: ExternalName
   externalName: elasticsearch.${PRIMARY_DNS_ZONE}
@@ -109,6 +111,37 @@ $patch: delete
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kibana-alerts
+  name: kibana-alerts-common
   namespace: elastic-stack-logging
 $patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-alerts-pd
+  namespace: elastic-stack-logging
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-alerts-pds
+  namespace: elastic-stack-logging
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-alerts-pf
+  namespace: elastic-stack-logging
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-pipeline-alerts
+  namespace: elastic-stack-logging
+data:
+  01-input.conf: -|
+    input {}
+$patch: merge
