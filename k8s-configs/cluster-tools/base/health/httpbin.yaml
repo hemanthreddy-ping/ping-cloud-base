@@ -1,5 +1,5 @@
 #
-# This defines the httpbin-pa-was deployment.
+# This defines the healthcheck-httpbin deployment.
 #
 apiVersion: apps/v1
 kind: Deployment
@@ -50,7 +50,7 @@ spec:
         - containerPort: 80
 ---
 #
-# This service exposes the httpbin-pa-was port to the cluster.
+# This service exposes the healthcheck-httpbin port to the cluster.
 #
 apiVersion: v1
 kind: Service
