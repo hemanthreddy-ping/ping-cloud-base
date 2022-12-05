@@ -164,8 +164,14 @@
 # SERVICE_SSM_PATH_PREFIX   | The prefix of the SSM path that contains Services  |
 #                           | data for the cluster                               | /pcpt/service
 #                           |                                                    |
-# SLACK_CHANNEL           ` | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
+# SLACK_CHANNEL             | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
 #                           | notification.                                      | Dev environment: nowhere
+#                           |                                                    |
+# NON_GA_SLACK_CHANNEL      | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
+#                           | notification in case of IS_GA set to 'false' to    | Dev environment: nowhere
+#                           | reduce amount of unnecessary notifications sent    |
+#                           | to on-call channel. Overrides SLACK_CHANNEL        |
+#                           | variable value if IS_GA=false.                     |
 #                           |                                                    |
 # TENANT_DOMAIN             | The tenant's domain, e.g. us1.poc.ping.cloud       | us1.poc.ping.cloud
 #                           |                                                    |
@@ -346,6 +352,7 @@ export PF_PROVISIONING_ENABLED=${PF_PROVISIONING_ENABLED:-false}
 # Default notification configuration for dev environment.
 export NOTIFICATION_ENABLED=${NOTIFICATION_ENABLED:-false}
 export SLACK_CHANNEL=${SLACK_CHANNEL:-nowhere}
+export NON_GA_SLACK_CHANNEL=${NON_GA_SLACK_CHANNEL:-nowhere}
 
 # PGO Prometheus notification.
 export PROM_NOTIFICATION_ENABLED=${PROM_NOTIFICATION_ENABLED:-false}
