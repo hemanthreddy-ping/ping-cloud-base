@@ -376,7 +376,6 @@ ${RADIUS_PROXY_ENABLED}
 ${IMAGE_TAG_PREFIX}
 ${ARGOCD_SLACK_TOKEN_BASE64}
 ${SLACK_CHANNEL}
-${NON_GA_SLACK_CHANNEL}
 ${PROM_SLACK_CHANNEL}
 ${DASH_REPO_URL}
 ${DASH_REPO_BRANCH}'
@@ -672,16 +671,15 @@ export PING_CLOUD_NAMESPACE='ping-cloud'
 export MYSQL_DATABASE='pingcentral'
 
 # Set Slack-related environmets variables and override it's values depending on IS_GA value.
-IS_GA_VALUE=$(get_is_ga_variable '/pcpt/stage/is-ga')
+get_is_ga_variable '/pcpt/stage/is-ga'
 export NON_GA_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL:-p1as-application-oncall}"
-# If IS_GA=true, use default Slack channel.
-if test "${IS_GA}" = 'true'; then
+# If IS_GA=true, use default Slack channel; if IS_GA=false, use NON_GA_SLACK_CHANNEL value as Slack channel.
+if "${IS_GA}"; then
   export SLACK_CHANNEL="${SLACK_CHANNEL:-p1as-application-oncall}"
-fi
-# If IS_GA=false, use NON_GA_SLACK_CHANNEL value as Slack channel.
-if test "${IS_GA}" = 'false'; then
+else
   export SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL}"
 fi
+
 export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-p1as-application-oncall}"
 
 # Print out the values being used for each variable.
@@ -841,7 +839,6 @@ ENVIRONMENTS="${ENVIRONMENTS:-${ALL_ENVIRONMENTS}}"
 
 export CLUSTER_STATE_REPO_URL="${CLUSTER_STATE_REPO_URL}"
 
-get_is_ga_variable '/pcpt/stage/is-ga'
 get_is_myping_variable '/pcpt/orch-api/is-myping'
 
 # The ENVIRONMENTS variable can either be the CDE names (e.g. dev, test, stage, prod) or the CHUB name "customer-hub",
