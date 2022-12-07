@@ -702,11 +702,11 @@ export NON_GA_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL:-nowhere}"
 # If IS_GA=true, use default Slack channel; if IS_GA=false, use NON_GA_SLACK_CHANNEL value as Slack channel.
 if "${IS_GA}"; then
   export SLACK_CHANNEL="${SLACK_CHANNEL:-p1as-application-oncall}"
+  export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-p1as-application-oncall}"
 else
   export SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL}"
+  export PROM_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL}"
 fi
-
-export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-nowhere}"
 
 # Print out the values being used for each variable.
 echo "Using TENANT_NAME: ${TENANT_NAME}"
@@ -758,7 +758,6 @@ echo "Using IRSA_PING_ANNOTATION_KEY_VALUE: ${IRSA_PING_ANNOTATION_KEY_VALUE}"
 echo "Using NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE: ${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}"
 
 echo "Using SLACK_CHANNEL: ${SLACK_CHANNEL}"
-echo "Using NON_GA_SLACK_CHANNEL: ${NON_GA_SLACK_CHANNEL}"
 echo "Using PROM_SLACK_CHANNEL: ${PROM_SLACK_CHANNEL}"
 echo ---
 
