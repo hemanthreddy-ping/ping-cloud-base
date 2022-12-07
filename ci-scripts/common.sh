@@ -15,15 +15,10 @@ SKIP_TESTS="${SKIP_TESTS:-pingdirectory/03-backup-restore.sh \
   pingaccess-was/09-csd-upload-test.sh \
   pingaccess/11-heartbeat-endpoint.sh \
   pingaccess/09-csd-upload-test.sh \
-  pingaccess/05-test-cloudwatch-logs.sh \
   pingaccess/03-change-default-db-password-test.sh \
-  pingaccess-was/05-test-cloudwatch-logs.sh \
-  pingfederate/05-test-cloudwatch-logs.sh \
-  pingdirectory/05-test-cloudwatch-logs.sh \
   pingfederate/09-heartbeat-endpoint.sh \
   pingaccess/08-artifact-test.sh \
   pingdelegator/01-admin-user-login.sh \
-  pingaccess-was/05-test-cloudwatch-logs.sh \
   chaos/01-delete-pa-admin-pod.sh }"
 
 # environment variables that are determined based on deployment type (traditional or PingOne)
