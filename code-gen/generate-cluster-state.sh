@@ -213,11 +213,12 @@
 # SLACK_CHANNEL              | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
 #                            | notification.                                      |
 #                            |                                                    |
-# NON_GA_SLACK_CHANNEL       | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
+# NON_GA_SLACK_CHANNEL       | The Slack channel name for argo-events to send     | CDE environment: nowhere
 #                            | notification in case of IS_GA set to 'false' to    | Dev environment: nowhere
 #                            | reduce amount of unnecessary notifications sent    |
 #                            | to on-call channel. Overrides SLACK_CHANNEL        |
-#                            | variable value if IS_GA=false.                     |
+#                            | variable value if IS_GA=false. By default, set     |
+#                            | to non-existent channel name to prevent flooding.  |
 #                            |                                                    |
 # SIZE                       | Size of the environment, which pertains to the     | x-small
 #                            | number of user identities. Legal values are        |
@@ -672,7 +673,7 @@ export MYSQL_DATABASE='pingcentral'
 
 # Set Slack-related environmets variables and override it's values depending on IS_GA value.
 get_is_ga_variable '/pcpt/stage/is-ga'
-export NON_GA_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL:-p1as-application-oncall}"
+export NON_GA_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL:-nowhere}"
 # If IS_GA=true, use default Slack channel; if IS_GA=false, use NON_GA_SLACK_CHANNEL value as Slack channel.
 if "${IS_GA}"; then
   export SLACK_CHANNEL="${SLACK_CHANNEL:-p1as-application-oncall}"
@@ -680,7 +681,7 @@ else
   export SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL}"
 fi
 
-export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-p1as-application-oncall}"
+export PROM_SLACK_CHANNEL="${PROM_SLACK_CHANNEL:-nowhere}"
 
 # Print out the values being used for each variable.
 echo "Using TENANT_NAME: ${TENANT_NAME}"
