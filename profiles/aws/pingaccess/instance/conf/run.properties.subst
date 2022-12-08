@@ -390,6 +390,11 @@ pf.redirect.header.X-Frame-Options=DENY
 
 rule.error.headers=
 
+# Comma-separated list of jdk tls disabled algorithms that will be appended to the existing list of disabled
+# algorithms in the java.security file. This property will be utilized in non-FIPs mode only.
+# Example: additional.security.jdk.tls.disabledAlgorithms=RSASSA-PSS, TLSv1.3
+additional.security.jdk.tls.disabledAlgorithms=
+
 #-------------------------------------------------------------------------------
 # Localization Settings
 #-------------------------------------------------------------------------------
@@ -414,46 +419,3 @@ rule.error.headers=
 
 pa.localization.resource.bundle.cache.enable=true
 pa.localization.missing.message.placeholder={}
-
-#-------------------------------------------------------------------------------
-# Runtime State Clustering
-#-------------------------------------------------------------------------------
-
-#
-# PingAccess supports the ability to share state information between engine nodes in a cluster for specific use
-# cases. These use cases are:
-#
-# - Providing fault-tolerance for mediated tokens if an engine node is taken offline.
-# - Reducing the number of token mediation STS transactions with PingFederate when the front-end load balancer does
-#   not provide a sticky session.
-# - Ensuring rate limits are enforced properly if the front-end load balancer does not provide a sticky session.
-#
-# If these use cases do not apply to your environment, you do NOT need to configure runtime state clustering.
-#
-
-# Allowed values for the following are: tcp/udp/none (default is none).
-pa.cluster.interprocess.communication=none
-pa.cluster.auth.pwd=
-pa.cluster.encrypt=false
-pa.cluster.bind.address=127.0.0.1
-pa.cluster.bind.port=7610
-pa.cluster.failure.detection.bind.port=7710
-pa.cluster.mcast.group.address=239.16.96.69
-pa.cluster.mcast.group.port=7611
-
-# When TCP is used, this property specifies a list of initial hosts to be
-# contacted for a group discovery.
-#
-# e.g. 10.0.1.4[7610],server2.mydomain.com[7610]
-#
-pa.cluster.tcp.discovery.initial.hosts=
-
-# Server State Management
-pa.cluster.serverstate.timeToIdleSeconds=86400
-pa.cluster.serverstate.staleEntryEvictionIntervalSeconds=60
-# This property is only used if pa.cluster.interprocess.communication is not none
-pa.cluster.serverstate.replicationIntervalMilliseconds=1000
-
-#   Log4j 2 Settings
-#   ---------------------------
-log4j2.formatMsgNoLookups=true
