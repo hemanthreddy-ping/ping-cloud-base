@@ -232,7 +232,7 @@ pa.interceptors.relativepath.decode.regex=[\\p{Po}\\p{N}\\p{Z}\\p{L}\\p{M}\\p{Zs
 pa.mbean.site.connection.pool.enable=false
 
 # By default, include no information in heartbeat, for security purposes
-enable.detailed.heartbeat.response=true
+enable.detailed.heartbeat.response=false
 # When detailed heartbeat response is enabled, number of seconds back to collect response statistics.
 # Set to a value less than 1 to disable.
 pa.statistics.window.seconds=10
