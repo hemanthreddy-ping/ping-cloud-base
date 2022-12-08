@@ -442,30 +442,6 @@ set_log_file() {
   kubectl logs -n "${PING_CLOUD_NAMESPACE}" "${server}" -c "${container}" --since=60m > ${log_file}
 }
 
-########################################################################################################################
-# Checks for existence of a particular log stream within AWS CloudWatch
-#
-# Arguments
-#   ${1} -> Name of log stream within CloudWatch
-#
-# Returns
-#   0 -> If log stream is present within CloudWatch
-#   1 -> If log stream is not present within CloudWatch
-########################################################################################################################
-function log_streams_exist() {
-  local log_stream_prefixes=$1
-  for log in ${log_stream_prefixes}; do
-    log_stream_count=$(aws logs --profile "${AWS_PROFILE}" describe-log-streams \
-      --log-group-name "${LOG_GROUP_NAME}" \
-      --log-stream-name-prefix "${log}" | jq '.logStreams | length')
-    if test "${log_stream_count}" -lt 1; then
-      echo "Log stream with prefix '$log' not found in CloudWatch"
-      return 1
-    fi
-  done
-  return 0
-}
-
 function find_shunit_dir() {
   # use egrep here or find will always return 0
   find . -type d -name "shunit*" | egrep '.*'
