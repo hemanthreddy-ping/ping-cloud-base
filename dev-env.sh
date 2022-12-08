@@ -167,11 +167,12 @@
 # SLACK_CHANNEL             | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
 #                           | notification.                                      | Dev environment: nowhere
 #                           |                                                    |
-# NON_GA_SLACK_CHANNEL      | The Slack channel name for argo-events to send     | CDE environment: p1as-application-oncall
+# NON_GA_SLACK_CHANNEL      | The Slack channel name for argo-events to send     | CDE environment: nowhere
 #                           | notification in case of IS_GA set to 'false' to    | Dev environment: nowhere
 #                           | reduce amount of unnecessary notifications sent    |
 #                           | to on-call channel. Overrides SLACK_CHANNEL        |
-#                           | variable value if IS_GA=false.                     |
+#                           | variable value if IS_GA=false. By default, set     |
+#                           | to non-existent channel name to prevent flooding.  |
 #                           |                                                    |
 # TENANT_DOMAIN             | The tenant's domain, e.g. us1.poc.ping.cloud       | us1.poc.ping.cloud
 #                           |                                                    |

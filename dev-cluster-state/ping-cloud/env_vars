@@ -81,7 +81,6 @@ PF_PROVISIONING_ENABLED=${PF_PROVISIONING_ENABLED}
 # Default argo-events notification configuration
 NOTIFICATION_ENABLED=${NOTIFICATION_ENABLED}
 SLACK_CHANNEL=${SLACK_CHANNEL}
-NON_GA_SLACK_CHANNEL=${NON_GA_SLACK_CHANNEL}
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
 
 # Prometheus argo-events notification configuration
