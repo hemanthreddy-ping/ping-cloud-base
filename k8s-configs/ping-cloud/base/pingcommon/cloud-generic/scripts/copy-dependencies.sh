@@ -2,7 +2,7 @@
 
 . "./utils.lib.sh"
 
-NEWRELIC_VERSION="7.7.0"
+NEWRELIC_VERSION="7.11.1"
 
 beluga_log "Copying logger.lib.sh"
 test -f ./logger.lib.sh && cp ./logger.lib.sh /data/logger.lib.sh
