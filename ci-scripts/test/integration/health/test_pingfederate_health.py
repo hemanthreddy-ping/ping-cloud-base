@@ -67,3 +67,11 @@ class TestPingFederateHealth(TestHealthBase):
             test_name in test_results,
             f"No '{test_name}' checks found in health check results",
         )
+
+    def test_health_check_has_hostname_results(self):
+        test_results = self.get_test_results(self.pingfederate, Categories.connectivity)
+        res = [key for key in test_results if "can connect to datastore" in key]
+        self.assertTrue(
+            len(res) > 0,
+            "'can connect to datastore' not found in health check results",
+        )
