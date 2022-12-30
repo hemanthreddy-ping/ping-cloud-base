@@ -9,6 +9,7 @@ SCRIPT_HOME=$(cd $(dirname ${0}); pwd)
 PWD=$(pwd)
 PCB_ROOT=${PWD/ping-cloud-base\/*/ping-cloud-base}
 source "${PCB_ROOT}/pcb_common.sh"
+pcb_common::source_utils
 
 # Configure aws and kubectl, unless skipped
 configure_aws
