@@ -6,14 +6,15 @@ set -e
 SCRIPT_HOME=$(cd $(dirname ${0}); pwd)
 . ${SCRIPT_HOME}/../common.sh
 
-PWD=$(pwd)
-PCB_ROOT=${PWD/ping-cloud-base\/*/ping-cloud-base}
-source "${PCB_ROOT}/pcb_common.sh"
-pcb_common::source_utils
-
 # Configure aws and kubectl, unless skipped
 configure_aws
 configure_kube
+
+PWD=$(pwd)
+PCB_ROOT=${PWD/ping-cloud-base\/*/ping-cloud-base}
+source "${PCB_ROOT}/pcb_common.sh"
+
+pcb_common::source_utils
 
 # If PingOne teardown just delete the PingOne environment and exit
 if [[ -n ${PINGONE} ]]; then
