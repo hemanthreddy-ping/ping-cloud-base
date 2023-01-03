@@ -5,7 +5,7 @@ kind: PostgresCluster
 metadata:
   name: pf-provisioning
 spec:
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.5-0
+  image: public.ecr.aws/r2h3l6e4/pingcloud-clustertools/crunchydata/crunchy-postgres:ubi8-14.5-0
   postgresVersion: 14
   metadata:
     labels:
@@ -49,7 +49,7 @@ spec:
       options: "SUPERUSER"
   backups:
     pgbackrest:
-      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.40-0
+      image: public.ecr.aws/r2h3l6e4/pingcloud-clustertools/crunchydata/crunchy-pgbackrest:ubi8-2.40-0
       global:
         repo1-path: /pingfederate/provisioning
         # Allow storage solution to handle retention (retain max from PGO perspective)
@@ -72,4 +72,4 @@ spec:
   monitoring:
     pgmonitor:
       exporter:
-        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.2.0-0
+        image: public.ecr.aws/r2h3l6e4/pingcloud-clustertools/crunchydata/crunchy-postgres-exporter:ubi8-5.2.0-0
