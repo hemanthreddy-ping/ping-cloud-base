@@ -26,6 +26,7 @@
 - Add healthcheck-pingdirectory cronjob
 - Added k8s serviceAccount for PA, PD & PF
 - Update ping-cloud-base to use the cluster tools from new ECR repo
+- Mirror our own version of PGO/crunchy images
 
 _Changes:_
 
@@ -35,6 +36,7 @@ _Changes:_
 - [X] PDO-4240 PF Health Check Tests - Certificates
 - [X] PDO-4279 Add Pod Disruption Budgets for PA-WAS Engine, PingDelegator
 - [X] PDO-4312 PA-WAS Health Check Tests - object creation, unauthenticated proxy requests
+- [X] PDO-4343 Mirror our own version of PGO/crunchy images
 - [X] PDO-4432 Logstash has broken tolerations
 - [X] PDO-4535 Argo CD non-root user changes
 - [X] PDO-4439 PF Health Check Tests - object creation, authentication
