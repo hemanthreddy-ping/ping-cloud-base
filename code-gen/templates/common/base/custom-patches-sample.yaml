@@ -382,7 +382,7 @@ spec:
 
 ---
 
-### Update pingaccess engine HPA min/max replicas and target CPU utilization ###
+### Update pingaccess-was engine HPA min/max replicas and target CPU utilization ###
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
