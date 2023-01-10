@@ -16,9 +16,9 @@ from requests_oauthlib import OAuth2Session
 API_LOCATION = "https://api-staging.pingone.com/v1"
 TOKEN_ENDPOINT = "https://auth-staging.pingone.com/as/token.oauth2"
 # These values are based on the ORG ID (defaults are for the dev PingOne org)
-ADMIN_ENV_ID = os.getenv("ADMIN_ENV_ID", "345cb89e-e8b7-4bd1-a3dc-03878c6e626b")
-P1_LICENSE_ID = os.getenv("P1_LICENSE_ID", "e9972c10-ff9d-4296-b5a6-21ed069617b0")
-WORKERAPP_CLIENT_ID = os.getenv("WORKERAPP_CLIENT_ID", "9b13de77-c499-4bd5-8419-88d3d3cbd814")
+ADMIN_ENV_ID = os.getenv("ADMIN_ENV_ID", "cd19f6de-539a-48cf-9492-3be989fdd364")
+P1_LICENSE_ID = os.getenv("P1_LICENSE_ID", "80bee17a-7b55-4d69-b2d5-b0d9051167dc")
+WORKERAPP_CLIENT_ID = os.getenv("WORKERAPP_CLIENT_ID", "cf167145-c981-4dd6-b43f-fa5d57d97ab9")
 WORKERAPP_TOKEN_ENDPOINT = "https://auth-staging.pingone.com/" + ADMIN_ENV_ID + "/as/token"
 
 # common constants
