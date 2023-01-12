@@ -20,7 +20,7 @@ source ../../../../../utils.sh
 cur_date=$(date -I seconds)
 tmp_dir="/tmp/pgo/${cur_date}"
 example_repo="postgres-operator-examples"
-commit_sha=$1
+commit_sha="${1}"
 repo_dir="${tmp_dir}/${example_repo}"
 repo_dir_kustomize="${repo_dir}/kustomize/install"
 
