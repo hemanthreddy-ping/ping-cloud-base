@@ -26,11 +26,16 @@
 - Add healthcheck-pingdirectory cronjob
 - Added k8s serviceAccount for PA, PD & PF
 - Update ping-cloud-base to use the cluster tools from new ECR repo
+- Configure Argo Redis container to run as nonroot
+- Update applications logs location
+- Refactor offline-enable script to use "dsreplication enable-with-static-topology" subcommand
+- Healthcheck logs now stored in separate index with 7 days retention period
 - Mirror our own version of PGO/crunchy images
 
 _Changes:_
 
 - [X] PDO-2799 Rewrite CloudWatch log tests
+- [X] PDO-3165 Refactor offline-enable script to use "dsreplication enable-with-static-topology" subcommand
 - [X] PDO-4186 beluga_log is not respecting verbosity levels
 - [X] PDO-4224 Properly propagate SSH key when upgrading CSR
 - [X] PDO-4240 PF Health Check Tests - Certificates
@@ -60,9 +65,12 @@ _Changes:_
 - [X] PDO-4648: Allow release branches to update image names using the kustomize image patch
 - [X] PDO-4649: prometheus-0/logstash-elastic-0 pod does not come up upon changing LEGACY_LOGGING or LS_JAVA_OPTS
 - [X] PDO-4669: EFS access point dir doesn't remove during PVC removal
-- [X] PDO-4671 Refactor elastic-stack manifests
+- [X] PDO-4671 Refactor elastic-stack manifests 
 - [X] PDO-4686 Update ping-cloud-base to use the cluster tools from new ECR repo
+- [X] PDO-4807 Configure Argo Redis container to run as nonroot
+- [X] PDO-4808 Update applications logs location
 - [X] PDO-4809 Refactor generate-cluster-state.sh to retain set value for slack channel alerts on upgrade
+- [X] PDO-4877: ELK logs for healthcheck pods should be storing for 7 days
 
 ### 1.16.0.0
 
