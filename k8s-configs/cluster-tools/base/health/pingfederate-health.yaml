@@ -17,7 +17,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: pingfederate-health
-            image: 705370621539.dkr.ecr.us-west-2.amazonaws.com/pingcloud-services/robot-framework:PDO-4291-PF-Health-Check-Test
+            image: public.ecr.aws/r2h3l6e4/pingcloud-services/robot-framework/dev:v1.17-release-branch-latest
             imagePullPolicy: Always
             securityContext:
               runAsGroup: 9999
