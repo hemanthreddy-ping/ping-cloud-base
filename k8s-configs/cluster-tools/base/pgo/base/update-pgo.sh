@@ -38,8 +38,8 @@ rm -rf "${repo_dir_kustomize}/singlenamespace"
 rsync -rv "${repo_dir_kustomize}/" .
 
 # Replace default crunchydata image to our ECR image
-ECR_REPO_NAME="public.ecr.aws/r2h3l6e4/pingcloud-clustertools"
-CRUNCHY_DATA_REPO="registry.developers.crunchydata.com"
+ECR_REPO_NAME='value: "public.ecr.aws/r2h3l6e4/pingcloud-clustertools'
+CRUNCHY_DATA_REPO='value: "registry.developers.crunchydata.com'
 
 find . -type f -exec sed -ie "s@$CRUNCHY_DATA_REPO@$ECR_REPO_NAME@g" {} \;
 
