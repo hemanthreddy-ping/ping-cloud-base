@@ -5,6 +5,8 @@ namespace: argocd
 
 resources:
 - argo.yaml
+- argocd-image-updater.yaml
+- argo-notifications-cm.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
