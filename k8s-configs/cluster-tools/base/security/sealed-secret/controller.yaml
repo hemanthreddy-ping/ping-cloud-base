@@ -49,6 +49,7 @@ rules:
   - create
   - update
   - delete
+  - watch
 - apiGroups:
   - ""
   resources:
