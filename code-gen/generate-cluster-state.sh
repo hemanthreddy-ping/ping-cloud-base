@@ -674,7 +674,7 @@ CLUSTER_STATE_REPO_NAME="${CLUSTER_STATE_REPO_URL##*/}"
 SERVER_PROFILE_URL_DERIVED="$(echo "${CLUSTER_STATE_REPO_URL}" | sed -e "s/${CLUSTER_STATE_REPO_NAME}/profile-repo/")"
 export SERVER_PROFILE_URL="${SERVER_PROFILE_URL:-${SERVER_PROFILE_URL_DERIVED}}"
 
-export K8S_GIT_URL="${K8S_GIT_URL:-https://github.com/pingidentity/ping-cloud-base}"
+export K8S_GIT_URL="${K8S_GIT_URL:-https://github.com/pingidentity/ping-cloud-base.git}"
 export K8S_GIT_BRANCH="${K8S_GIT_BRANCH:-${CURRENT_GIT_BRANCH}}"
 
 export SSH_ID_PUB_FILE="${SSH_ID_PUB_FILE}"
@@ -682,7 +682,7 @@ export SSH_ID_KEY_FILE="${SSH_ID_KEY_FILE}"
 
 export TARGET_DIR="${TARGET_DIR:-/tmp/sandbox}"
 
-export ACCOUNT_BASE_PATH=${ACCOUNT_BASE_PATH:-ssm://pcpt/config/k8s-config/accounts}
+export ACCOUNT_BASE_PATH=${ACCOUNT_BASE_PATH:-ssm://pcpt/config/k8s-config/accounts/}
 export PGO_BUCKET_URI_SUFFIX=${PGO_BUCKET_URI_SUFFIX:-/pgo-bucket/uri}
 
 # IRSA for ping product pods. The role name is predefined as a part of the interface contract.
@@ -836,6 +836,7 @@ BOOTSTRAP_DIR="${TARGET_DIR}/${BOOTSTRAP_SHORT_DIR}"
 
 CLUSTER_STATE_REPO_DIR="${TARGET_DIR}/cluster-state"
 K8S_CONFIGS_DIR="${CLUSTER_STATE_REPO_DIR}/k8s-configs"
+GIT_OPS_VALIDATION_FOLDER="${K8S_CONFIGS_DIR}/validation"
 
 PROFILE_REPO_DIR="${TARGET_DIR}/profile-repo"
 PROFILES_DIR="${PROFILE_REPO_DIR}/profiles"
@@ -854,6 +855,9 @@ cp ../.gitignore "${CLUSTER_STATE_REPO_DIR}"
 cp ../.gitignore "${PROFILE_REPO_DIR}"
 
 cp ../k8s-configs/cluster-tools/base/git-ops/git-ops-command.sh "${K8S_CONFIGS_DIR}"
+cp ../k8s-configs/cluster-tools/base/git-ops/validation/verify_descriptor_json.py "${GIT_OPS_VALIDATION_FOLDER}"
+cp ../k8s-configs/cluster-tools/base/git-ops/validation/json_util.py "${GIT_OPS_VALIDATION_FOLDER}"
+
 find "${TEMPLATES_HOME}" -type f -maxdepth 1 | xargs -I {} cp {} "${K8S_CONFIGS_DIR}"
 
 echo "${PING_CLOUD_BASE_COMMIT_SHA}" > "${TARGET_DIR}/pcb-commit-sha.txt"
@@ -1060,7 +1064,12 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
   # Rename to the actual region nick name.
   mv "${ENV_DIR}/region" "${ENV_DIR}/${REGION_NICK_NAME}"
 
-  substitute_vars "${ENV_DIR}" "${REPO_VARS}" secrets.yaml env_vars
+  substitute_vars "${ENV_DIR}" "${REPO_VARS}" secrets.yaml env_vars values.yaml
+  # TODO: This duplicate calls are needed to substitute the derived variables & the IS_BELUGA_ENV in values files only
+  #  clean this up with PDO-4842 when all apps are migrated to values files by adding IS_BELUGA_ENV to DEFAULT_VARS
+  #  and redoing how derived variables are set
+  substitute_vars "${ENV_DIR}" "${REPO_VARS}" values.yaml
+  substitute_vars "${ENV_DIR}" '${IS_BELUGA_ENV}' values.yaml
 
   # Regional enablement - add admins, backups, etc. to primary.
   if test "${TENANT_DOMAIN}" = "${PRIMARY_TENANT_DOMAIN}"; then
