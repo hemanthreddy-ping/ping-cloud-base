@@ -9,6 +9,12 @@ patches:
       kind: Deployment
       name: sealed-secrets-controller
     patch: | 
+      # When sealedSecrets is enabled we do not want argoCD to overwrite the generated secret by secrets
+      - op: add
+        path: /metadata/annotations
+        value: 
+          argocd.argoproj.io/sync-options: Prune=false
+
       # Changing image to P1AS internal copy
       - op: replace
         path: /spec/template/spec/containers/0/image
