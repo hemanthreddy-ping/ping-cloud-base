@@ -208,6 +208,7 @@ patches:
       path: /spec/template/spec/containers/0/args
       value:
           - /nginx-ingress-controller
+          - --enable-annotation-validation=true
           - --configmap=$(POD_NAMESPACE)/nginx-configuration
           - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
           - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
