@@ -1339,7 +1339,7 @@ for ENV_OR_BRANCH in ${SUPPORTED_ENVIRONMENT_TYPES}; do
   organize_code_for_csr
 
   PRIMARY_PING_KUST_FILE="${K8S_CONFIGS_DIR}/${REGION_NICK_NAME}/kustomization.yaml"
-
+  
   # Copy around files for Developer CDE before substituting vars
   if "${IS_BELUGA_ENV}"; then
     echo "IS_BELUGA_ENV detected, making developer changes to deployment"
@@ -1414,6 +1414,13 @@ for ENV_OR_BRANCH in ${SUPPORTED_ENVIRONMENT_TYPES}; do
   if test "${TENANT_DOMAIN}" = "${PRIMARY_TENANT_DOMAIN}"; then
     sed -i.bak 's/^\(.*remove-from-secondary-patch.yaml\)$/# \1/g' "${PRIMARY_PING_KUST_FILE}"
     rm -f "${PRIMARY_PING_KUST_FILE}.bak"
+  else
+    # Child regions
+    if test "${HEALTHCHECKS_ENABLED}" != "true"; then
+      # When healthchecks are disabled, comment out duplicated delete patches for deployments in child regions
+      sed -i.bak 's/^\(.*health\/remove-from-secondary-patch.yaml\)$/# \1/g' "${PRIMARY_PING_KUST_FILE}"
+      rm -f "${PRIMARY_PING_KUST_FILE}.bak"
+    fi
   fi
 
   echo "Copying server profiles for environment ${ENV}"
